@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifica | Rompiendo estereotipos</title>
+
+    <style>
+        :root {
+            --morado: #713b91;
+            --morado-oscuro: #49245f;
+            --turquesa: #26b8b0;
+            --amarillo: #ffce55;
+            --coral: #ff786e;
+            --fondo: #f8f5fc;
+            --texto: #342b3c;
+            --blanco: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--morado-oscuro);
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h2 {
+            font-size: 21px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: var(--amarillo);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #713b91, #a56bc2);
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        .hero .etiqueta {
+            display: inline-block;
+            background: var(--amarillo);
+            color: var(--morado-oscuro);
+            padding: 7px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 50px);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: auto;
+            font-size: 18px;
+        }
+
+        .boton {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 13px 25px;
+            border-radius: 30px;
+            background: var(--amarillo);
+            color: var(--morado-oscuro);
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .boton:hover {
+            transform: translateY(-3px);
+            background: white;
+        }
+
+        section {
+            padding: 55px 8%;
+        }
+
+        .titulo {
+            text-align: center;
+            color: var(--morado);
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 35px;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            border-top: 6px solid var(--turquesa);
+        }
+
+        .tarjeta:nth-child(2) {
+            border-color: var(--coral);
+        }
+
+        .tarjeta:nth-child(3) {
+            border-color: var(--amarillo);
+        }
+
+        .tarjeta:nth-child(4) {
+            border-color: var(--morado);
+        }
+
+        .tarjeta h3 {
+            color: var(--morado);
+            margin-bottom: 12px;
+        }
+
+        .icono {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .ejemplo {
+            background: #eee5f5;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 12px 0;
+        }
+
+        .ejemplo strong {
+            color: var(--morado-oscuro);
+        }
+
+        .actividad {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 850px;
+            margin: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .pregunta {
+            padding: 20px 0;
+            border-bottom: 1px solid #e5dce9;
+        }
+
+        .pregunta h3 {
+            color: var(--morado-oscuro);
+            margin-bottom: 12px;
+        }
+
+        .opcion {
+            display: block;
+            background: #f6f2fa;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .opcion:hover {
+            background: #e9dff1;
+        }
+
+        .opcion input {
+            margin-right: 10px;
+            accent-color: var(--morado);
+        }
+
+        .resultado {
+            display: none;
+            background: #e4f8f5;
+            border-left: 6px solid var(--turquesa);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .resultado h3 {
+            color: #147a73;
+            margin-bottom: 8px;
+        }
+
+        .retroalimentacion {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .reflexion {
+            background: var(--morado-oscuro);
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .reflexion h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .reflexion p {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        footer {
+            background: #291638;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            font-size: 14px;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--amarillo);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            section {
+                padding: 40px 6%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+    <header>
+        <h2>💜 Rompiendo estereotipos</h2>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="aprendizajes.html">Aprende</a>
+            <a href="#conceptos">Identifica</a>
+            <a href="#situaciones">Situaciones</a>
+            <a href="#actividad">Actividad</a>
+        </nav>
+    </header>
+
+    <!-- PORTADA -->
+    <section class="hero" id="inicio">
+        <span class="etiqueta">MÓDULO 2 | IDENTIFICA</span>
+
+        <h1>¡Aprende a reconocer los estereotipos!</h1>
+
+        <p>
+            Observa tu entorno, cuestiona las ideas que limitan a las personas
+            y descubre cómo identificar situaciones de desigualdad y discriminación.
+        </p>
+
+        <a href="#conceptos" class="boton">Comenzar actividad</a>
+    </section>
+
+    <!-- INTRODUCCIÓN -->
+    <section>
+        <h2 class="titulo">¿Qué debemos identificar?</h2>
+
+        <p class="subtitulo">
+            En nuestra vida cotidiana podemos encontrar comentarios, acciones
+            y comportamientos que reproducen estereotipos de género.
+            Identificarlos es el primer paso para cambiarlos.
+        </p>
+
+        <div class="tarjetas" id="conceptos">
+
+            <article class="tarjeta">
+                <div class="icono">💭</div>
+                <h3>Estereotipo</h3>
+                <p>
+                    Es una idea generalizada sobre cómo deben ser,
+                    comportarse o actuar las personas por ser hombres o mujeres.
+                </p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong>
+                    "Las mujeres no son buenas para las matemáticas".
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="icono">⚖️</div>
+                <h3>Prejuicio</h3>
+                <p>
+                    Es una opinión o juicio anticipado sobre una persona
+                    sin conocerla realmente.
+                </p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong>
+                    Pensar que un hombre no sabe cuidar niños.
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="icono">🚫</div>
+                <h3>Discriminación</h3>
+                <p>
+                    Es un trato desigual o injusto hacia una persona
+                    por alguna característica personal o social.
+                </p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong>
+                    No contratar a una mujer por estar embarazada.
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="icono">🤝</div>
+                <h3>Desigualdad</h3>
+                <p>
+                    Ocurre cuando las personas no tienen las mismas
+                    oportunidades, derechos o condiciones para desarrollarse.
+                </p>
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong>
+                    Dar menos oportunidades de ascenso a las mujeres.
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- SITUACIONES COTIDIANAS -->
+    <section id="situaciones">
+        <h2 class="titulo">Detectives de estereotipos 🔎</h2>
+
+        <p class="subtitulo">
+            Los estereotipos pueden aparecer en diferentes espacios.
+            Analiza los siguientes ejemplos.
+        </p>
+
+        <div class="tarjetas">
+
+            <article class="tarjeta">
+                <div class="icono">🏠</div>
+                <h3>En la familia</h3>
+                <p>
+                    Se espera que las mujeres realicen las tareas domésticas
+                    mientras los hombres descansan.
+                </p>
+                <div class="ejemplo">
+                    <strong>Identifica:</strong>
+                    Distribución desigual de responsabilidades.
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="icono">🏫</div>
+                <h3>En la escuela</h3>
+                <p>
+                    Se dice que los niños son mejores para programar
+                    y las niñas para decorar.
+                </p>
+                <div class="ejemplo">
+                    <strong>Identifica:</strong>
+                    Estereotipo sobre las habilidades.
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="icono">💼</div>
+                <h3>En el trabajo</h3>
+                <p>
+                    Se considera que un hombre debe ocupar puestos
+                    directivos porque tiene mayor autoridad.
+                </p>
+                <div class="ejemplo">
+                    <strong>Identifica:</strong>
+                    Prejuicio y desigualdad de oportunidades.
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="icono">💻</div>
+                <h3>En la tecnología</h3>
+                <p>
+                    Se piensa que las carreras de informática
+                    son únicamente para hombres.
+                </p>
+                <div class="ejemplo">
+                    <strong>Identifica:</strong>
+                    Estereotipo que limita la participación.
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ACTIVIDAD INTERACTIVA -->
+    <section id="actividad">
+        <h2 class="titulo">🕵️ Reto: Detecta el estereotipo</h2>
+
+        <p class="subtitulo">
+            Lee cada situación y selecciona la respuesta que consideres correcta.
+            Al finalizar, podrás conocer tu puntuación.
+        </p>
+
+        <div class="actividad">
+
+            <form id="formulario">
+
+                <div class="pregunta">
+                    <h3>1. En un equipo de informática, un compañero dice que las mujeres no saben programar. ¿Qué identificas?</h3>
+
+                    <label class="opcion">
+                        <input type="radio" name="p1" value="a">
+                        Una opinión basada en una habilidad comprobada.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p1" value="b">
+                        Un estereotipo de género.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p1" value="c">
+                        Una regla escolar.
+                    </label>
+                </div>
+
+                <div class="pregunta">
+                    <h3>2. En casa, solamente las mujeres deben cocinar y limpiar. ¿Qué situación representa?</h3>
+
+                    <label class="opcion">
+                        <input type="radio" name="p2" value="a">
+                        Una distribución equitativa.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p2" value="b">
+                        Una actividad recreativa.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p2" value="c">
+                        Un estereotipo y una distribución desigual de responsabilidades.
+                    </label>
+                </div>
+
+                <div class="pregunta">
+                    <h3>3. Una empresa rechaza a una mujer para un puesto porque considera que los hombres son mejores líderes. ¿Qué identificas?</h3>
+
+                    <label class="opcion">
+                        <input type="radio" name="p3" value="a">
+                        Discriminación basada en prejuicios.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p3" value="b">
+                        Igualdad de oportunidades.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p3" value="c">
+                        Trabajo colaborativo.
+                    </label>
+                </div>
+
+                <div class="pregunta">
+                    <h3>4. Un estudiante decide estudiar enfermería aunque sus compañeros dicen que es una profesión para mujeres. ¿Qué demuestra?</h3>
+
+                    <label class="opcion">
+                        <input type="radio" name="p4" value="a">
+                        Que debe cambiar de carrera.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p4" value="b">
+                        Que las profesiones no deben limitarse por el género.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p4" value="c">
+                        Que los estereotipos son necesarios.
+                    </label>
+                </div>
+
+                <div class="pregunta">
+                    <h3>5. En una clase, todos los estudiantes tienen la misma oportunidad de participar en un proyecto tecnológico. ¿Qué se promueve?</h3>
+
+                    <label class="opcion">
+                        <input type="radio" name="p5" value="a">
+                        Competencia desleal.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p5" value="b">
+                        Discriminación.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p5" value="c">
+                        Igualdad de oportunidades.
+                    </label>
+                </div>
+
+                <button type="submit" class="boton">
+                    Evaluar mis respuestas
+                </button>
+
+            </form>
+
+            <div class="resultado" id="resultado" aria-live="polite">
+                <h3 id="tituloResultado"></h3>
+                <p id="puntuacion"></p>
+                <div id="retroalimentacion" class="retroalimentacion"></div>
+
+                <button type="button" class="boton" onclick="reiniciar()">
+                    Volver a intentarlo
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- REFLEXIÓN -->
+    <section class="reflexion" id="reflexion">
+        <h2>¡Cuestiona, identifica y transforma!</h2>
+
+        <p>
+            Reconocer los estereotipos nos permite construir espacios
+            donde todas las personas puedan desarrollar sus capacidades,
+            elegir libremente y participar sin discriminación.
+        </p>
+
+        <p style="margin-top: 18px;">
+            <strong>Reflexiona:</strong> ¿Alguna vez has escuchado una frase
+            que limite las capacidades de alguien por su género?
+            ¿Qué harías para cambiar esa situación?
+        </p>
+
+        <a href="aprendizajes.html" class="volver">
+            ← Regresar al módulo Aprende
+        </a>
+
+        <br>
+
+        <a href="index.html" class="volver">
+            Ir al inicio del proyecto →
+        </a>
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <p>Proyecto STEM: Rompiendo estereotipos</p>
+        <p>¡Tus capacidades no tienen género!</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        const respuestasCorrectas = {
+            p1: "b",
+            p2: "c",
+            p3: "a",
+            p4: "b",
+            p5: "c"
+        };
+
+        const explicaciones = [
+            "Es un estereotipo porque atribuye una capacidad o incapacidad a las personas por su género.",
+            "Las responsabilidades domésticas pueden compartirse; asignarlas únicamente a las mujeres reproduce roles de género.",
+            "Es discriminación porque se niega una oportunidad laboral con base en un prejuicio sobre el liderazgo.",
+            "Todas las personas pueden elegir su profesión de acuerdo con sus intereses y habilidades.",
+            "La igualdad de oportunidades permite que todas las personas participen y desarrollen sus capacidades."
+        ];
+
+        const formulario = document.getElementById("formulario");
+
+        formulario.addEventListener("submit", function(evento) {
+
+            evento.preventDefault();
+
+            let puntos = 0;
+            let comentarios = "";
+
+            for (let i = 1; i <= 5; i++) {
+
+                const seleccion = document.querySelector(
+                    'input[name="p' + i + '"]:checked'
+                );
+
+                if (!seleccion) {
+                    alert("Por favor, responde todas las preguntas antes de evaluar.");
+                    return;
+                }
+
+                if (seleccion.value === respuestasCorrectas["p" + i]) {
+
+                    puntos += 20;
+
+                    comentarios +=
+                        "<p>✅ Pregunta " + i +
+                        ": ¡Correcto! " + explicaciones[i - 1] +
+                        "</p>";
+
+                } else {
+
+                    comentarios +=
+                        "<p>❌ Pregunta " + i +
+                        ": Respuesta incorrecta. " + explicaciones[i - 1] +
+                        "</p>";
+                }
+            }
+
+            document.getElementById("resultado").style.display = "block";
+
+            document.getElementById("tituloResultado").textContent =
+                puntos >= 80 ? "¡Excelente trabajo! 🌟" :
+                puntos >= 60 ? "¡Buen esfuerzo! 💪" :
+                "¡Sigue aprendiendo! 📚";
+
+            document.getElementById("puntuacion").textContent =
+                "Obtuviste " + puntos + " de 100 puntos.";
+
+            document.getElementById("retroalimentacion").innerHTML =
+                comentarios;
+
+            document.getElementById("resultado").scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        });
+
+        function reiniciar() {
+
+            formulario.reset();
+
+            document.getElementById("resultado").style.display = "none";
+
+            document.getElementById("inicio").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+    </script>
+
+</body>
+</html>

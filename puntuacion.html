@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi puntuación | Rompiendo estereotipos</title>
+
+<style>
+:root {
+    --morado: #673ab7;
+    --morado-oscuro: #4527a0;
+    --turquesa: #20b8b0;
+    --amarillo: #ffd54f;
+    --coral: #ff796c;
+    --fondo: #f7f5fc;
+    --texto: #302b3d;
+    --blanco: #ffffff;
+    --verde: #2e9d68;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+header {
+    background: white;
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    color: var(--morado);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: var(--turquesa);
+}
+
+.hero {
+    background: linear-gradient(135deg, var(--morado), #9575cd);
+    color: white;
+    text-align: center;
+    padding: 65px 20px;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: var(--amarillo);
+    color: #493600;
+    padding: 7px 17px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin-bottom: 12px;
+}
+
+.hero p {
+    max-width: 720px;
+    margin: auto;
+    font-size: 18px;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 1050px;
+    margin: 45px auto;
+}
+
+h2 {
+    color: var(--morado);
+    margin-bottom: 15px;
+    font-size: 27px;
+}
+
+.panel {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.05);
+}
+
+.resumen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.tarjeta {
+    background: white;
+    padding: 23px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+    border-top: 5px solid var(--turquesa);
+}
+
+.tarjeta:nth-child(2) {
+    border-top-color: var(--amarillo);
+}
+
+.tarjeta:nth-child(3) {
+    border-top-color: var(--coral);
+}
+
+.tarjeta:nth-child(4) {
+    border-top-color: var(--morado);
+}
+
+.icono {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.numero {
+    color: var(--morado);
+    font-size: 32px;
+    font-weight: bold;
+    display: block;
+}
+
+.descripcion {
+    font-size: 14px;
+    color: #6d6678;
+}
+
+.barra {
+    width: 100%;
+    height: 17px;
+    background: #e9e3f2;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progreso {
+    height: 100%;
+    width: 0%;
+    background: var(--turquesa);
+    transition: width .4s;
+}
+
+.fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee8f4;
+    flex-wrap: wrap;
+}
+
+.fila:last-child {
+    border-bottom: none;
+}
+
+.fila strong {
+    color: var(--morado-oscuro);
+}
+
+.puntos {
+    font-weight: bold;
+    color: var(--verde);
+}
+
+.medallas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.medalla {
+    background: #faf9fc;
+    border: 2px solid #e5deef;
+    border-radius: 13px;
+    padding: 18px;
+    text-align: center;
+    opacity: .45;
+}
+
+.medalla.obtenida {
+    opacity: 1;
+    background: #fff9e5;
+    border-color: var(--amarillo);
+}
+
+.medalla span {
+    display: block;
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.medalla strong {
+    color: var(--morado);
+    display: block;
+}
+
+.mensaje {
+    text-align: center;
+    background: linear-gradient(135deg, #d9f5f1, #fff1d1);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px 0;
+}
+
+.mensaje h2 {
+    color: var(--morado);
+}
+
+.boton {
+    display: inline-block;
+    border: none;
+    background: var(--morado);
+    color: white;
+    padding: 13px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 8px 5px;
+    font-size: 15px;
+}
+
+.boton:hover {
+    background: var(--morado-oscuro);
+}
+
+.boton-secundario {
+    background: var(--turquesa);
+}
+
+.boton-secundario:hover {
+    background: #138b85;
+}
+
+.nota {
+    background: #fff5d6;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+footer {
+    background: #302344;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 50px;
+}
+
+@media(max-width:700px) {
+    header {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .contenedor {
+        width: 92%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">💜 Rompiendo estereotipos</div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="aprendizajes.html">Aprende</a>
+        <a href="identifica.html">Identifica</a>
+        <a href="juego.html">Juega</a>
+        <a href="profesiones.html">Profesiones</a>
+        <a href="situaciones.html">Situaciones</a>
+        <a href="misiones.html">Misiones</a>
+        <a href="evaluacion.html">Evaluación</a>
+        <a href="#puntuacion">Mi puntuación</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <span class="etiqueta">MI TABLERO DE LOGROS</span>
+    <h1>🏆 ¡Cada avance cuenta!</h1>
+    <p>
+        Consulta tus puntos, reconoce tus logros y descubre cuánto
+        has avanzado en el proyecto Rompiendo estereotipos.
+    </p>
+</section>
+
+<main class="contenedor">
+
+    <section class="panel">
+        <h2>🌟 Mi progreso</h2>
+        <p>
+            Este tablero reúne los puntos obtenidos en las actividades
+            que cuentan con registro automático.
+        </p>
+
+        <div class="resumen" style="margin-top:25px;">
+
+            <div class="tarjeta">
+                <div class="icono">⭐</div>
+                <span class="numero" id="totalPuntos">0</span>
+                <span class="descripcion">Puntos acumulados</span>
+            </div>
+
+            <div class="tarjeta">
+                <div class="icono">🎮</div>
+                <span class="numero" id="puntosJuegos">0</span>
+                <span class="descripcion">Puntos en juegos</span>
+            </div>
+
+            <div class="tarjeta">
+                <div class="icono">🚀</div>
+                <span class="numero" id="puntosMisiones">0</span>
+                <span class="descripcion">Puntos en misiones</span>
+            </div>
+
+            <div class="tarjeta">
+                <div class="icono">📝</div>
+                <span class="numero" id="notaEvaluacion">--</span>
+                <span class="descripcion">Evaluación final / 100</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="panel" id="puntuacion">
+        <h2>📊 Mi avance general</h2>
+
+        <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+            <strong>Progreso de misiones</strong>
+            <strong id="porcentajeMisiones">0%</strong>
+        </div>
+
+        <div class="barra">
+            <div class="progreso" id="barraMisiones"></div>
+        </div>
+
+        <p id="textoMisiones">
+            Aún no has completado misiones.
+        </p>
+
+        <br>
+
+        <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+            <strong>Calificación de evaluación</strong>
+            <strong id="porcentajeEvaluacion">0%</strong>
+        </div>
+
+        <div class="barra">
+            <div class="progreso" id="barraEvaluacion"></div>
+        </div>
+
+        <p id="textoEvaluacion">
+            Todavía no has presentado la evaluación final.
+        </p>
+    </section>
+
+    <section class="panel">
+        <h2>📚 Desglose de puntos</h2>
+
+        <div class="fila">
+            <div>
+                <strong>🎮 Juegos interactivos</strong>
+                <p class="descripcion">Módulo 3: Juega</p>
+            </div>
+            <span class="puntos" id="detalleJuegos">0 puntos</span>
+        </div>
+
+        <div class="fila">
+            <div>
+                <strong>🚀 Misiones completadas</strong>
+                <p class="descripcion">Módulo 6: Misiones</p>
+            </div>
+            <span class="puntos" id="detalleMisiones">0 puntos</span>
+        </div>
+
+        <div class="fila">
+            <div>
+                <strong>📝 Evaluación final</strong>
+                <p class="descripcion">Módulo 7: Evaluación (calificación, no puntos acumulables)</p>
+            </div>
+            <span class="puntos" id="detalleEvaluacion">Sin presentar</span>
+        </div>
+
+        <div class="fila">
+            <div>
+                <strong>📖 Aprende, Identifica, Profesiones y Situaciones</strong>
+                <p class="descripcion">Módulos de aprendizaje y reflexión</p>
+            </div>
+            <span class="puntos">Actividades formativas</span>
+        </div>
+
+        <div class="nota">
+            <strong>Nota:</strong> La calificación de la evaluación se
+            muestra por separado y no se suma a los puntos de los juegos
+            ni de las misiones. Así se evita mezclar escalas diferentes.
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>🏅 Mis insignias y reconocimientos</h2>
+        <p>
+            Las insignias se activan automáticamente de acuerdo con
+            los puntos obtenidos y las misiones completadas.
+        </p>
+
+        <div class="medallas">
+
+            <div class="medalla" id="medalla1">
+                <span>🌱</span>
+                <strong>Primeros pasos</strong>
+                <small>Obtén tus primeros 20 puntos.</small>
+            </div>
+
+            <div class="medalla" id="medalla2">
+                <span>🔍</span>
+                <strong>Observador consciente</strong>
+                <small>Completa una misión.</small>
+            </div>
+
+            <div class="medalla" id="medalla3">
+                <span>💡</span>
+                <strong>Rompeestereotipos</strong>
+                <small>Obtén 100 puntos.</small>
+            </div>
+
+            <div class="medalla" id="medalla4">
+                <span>🤝</span>
+                <strong>Promotor de igualdad</strong>
+                <small>Completa cuatro misiones.</small>
+            </div>
+
+            <div class="medalla" id="medalla5">
+                <span>🌟</span>
+                <strong>Agente del cambio</strong>
+                <small>Completa las cinco misiones.</small>
+            </div>
+
+            <div class="medalla" id="medalla6">
+                <span>🎓</span>
+                <strong>Aprendiz destacado</strong>
+                <small>Obtén 90 o más en la evaluación.</small>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="mensaje">
+        <h2 id="tituloMensaje">¡Tu aventura comienza!</h2>
+        <p id="mensajeMotivador">
+            Participa en las actividades, completa tus misiones
+            y descubre todo lo que puedes lograr.
+        </p>
+        <br>
+        <strong>¡Tus capacidades no tienen género!</strong>
+    </section>
+
+    <div style="text-align:center; margin:35px 0;">
+        <a href="juego.html" class="boton">
+            Volver a Jugar
+        </a>
+
+        <a href="misiones.html" class="boton boton-secundario">
+            Continuar misiones
+        </a>
+
+        <a href="resultado.html" class="boton">
+            Mi resultado general →
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    <p><strong>ROMPIENDO ESTEREOTIPOS</strong></p>
+    <p>¡Tus capacidades no tienen género!</p>
+    <p>Proyecto STEM | Ciencia, Tecnología, Ingeniería y Matemáticas</p>
+</footer>
+
+<script>
+
+// Claves utilizadas por los módulos anteriores
+const CLAVE_JUEGOS = "rompiendoEstereotiposPuntos";
+const CLAVE_MISIONES = "rompiendoEstereotiposMisiones";
+const CLAVE_EVALUACION = "rompiendoEstereotiposEvaluacion";
+
+// Recuperar datos de manera segura
+function recuperar(clave) {
+    try {
+        const dato = localStorage.getItem(clave);
+        return dato ? JSON.parse(dato) : null;
+    } catch (error) {
+        return null;
+    }
+}
+
+// Obtener puntuación de juegos
+function obtenerPuntosJuegos() {
+
+    const datos = recuperar(CLAVE_JUEGOS);
+
+    if (typeof datos === "number") {
+        return Math.max(0, datos);
+    }
+
+    if (datos && typeof datos.total === "number") {
+        return Math.max(0, datos.total);
+    }
+
+    return 0;
+}
+
+// Obtener misiones completadas
+function obtenerMisiones() {
+
+    const datos = recuperar(CLAVE_MISIONES);
+
+    if (
+        datos &&
+        Array.isArray(datos.misiones) &&
+        datos.misiones.length === 5
+    ) {
+        return datos.misiones.filter(valor => valor === true).length;
+    }
+
+    return 0;
+}
+
+// Obtener evaluación final
+function obtenerEvaluacion() {
+
+    const datos = recuperar(CLAVE_EVALUACION);
+
+    if (
+        datos &&
+        typeof datos.calificacion === "number" &&
+        datos.calificacion >= 0 &&
+        datos.calificacion <= 100
+    ) {
+        return datos;
+    }
+
+    return null;
+}
+
+// Activar insignias
+function activarMedalla(id, condicion) {
+
+    const medalla = document.getElementById(id);
+
+    if (condicion) {
+        medalla.classList.add("obtenida");
+    } else {
+        medalla.classList.remove("obtenida");
+    }
+}
+
+// Cargar tablero
+function cargarPuntuacion() {
+
+    const juegos = obtenerPuntosJuegos();
+    const misiones = obtenerMisiones();
+    const puntosMisiones = misiones * 100;
+    const evaluacion = obtenerEvaluacion();
+
+    // Total: solo suma puntos de juegos y misiones
+    const total = juegos + puntosMisiones;
+
+    // Resumen
+    document.getElementById("totalPuntos").textContent = total;
+    document.getElementById("puntosJuegos").textContent = juegos;
+    document.getElementById("puntosMisiones").textContent = puntosMisiones;
+
+    document.getElementById("notaEvaluacion").textContent =
+        evaluacion ? evaluacion.calificacion : "--";
+
+    // Desglose
+    document.getElementById("detalleJuegos").textContent =
+        juegos + " puntos";
+
+    document.getElementById("detalleMisiones").textContent =
+        puntosMisiones + " puntos";
+
+    document.getElementById("detalleEvaluacion").textContent =
+        evaluacion ? evaluacion.calificacion + " / 100" : "Sin presentar";
+
+    // Progreso de misiones
+    const avanceMisiones = (misiones / 5) * 100;
+
+    document.getElementById("porcentajeMisiones").textContent =
+        avanceMisiones + "%";
+
+    document.getElementById("barraMisiones").style.width =
+        avanceMisiones + "%";
+
+    document.getElementById("textoMisiones").textContent =
+        "Has completado " + misiones + " de 5 misiones.";
+
+    // Progreso de evaluación
+    const nota = evaluacion ? evaluacion.calificacion : 0;
+
+    document.getElementById("porcentajeEvaluacion").textContent =
+        evaluacion ? nota + "%" : "0%";
+
+    document.getElementById("barraEvaluacion").style.width =
+        nota + "%";
+
+    document.getElementById("textoEvaluacion").textContent =
+        evaluacion
+            ? "Tu evaluación registra " + nota + " puntos de 100."
+            : "Todavía no has presentado la evaluación final.";
+
+    // Insignias
+    activarMedalla("medalla1", total >= 20);
+    activarMedalla("medalla2", misiones >= 1);
+    activarMedalla("medalla3", total >= 100);
+    activarMedalla("medalla4", misiones >= 4);
+    activarMedalla("medalla5", misiones === 5);
+    activarMedalla("medalla6", nota >= 90);
+
+    // Mensajes motivacionales
+    let titulo = "¡Tu aventura comienza!";
+    let mensaje = "Participa en las actividades, completa tus misiones y descubre todo lo que puedes lograr.";
+
+    if (misiones === 5 && evaluacion && nota >= 90) {
+        titulo = "🏆 ¡Agente del cambio destacado!";
+        mensaje = "Has completado todas tus misiones y alcanzado un excelente resultado en la evaluación. ¡Felicidades!";
+    } else if (misiones === 5) {
+        titulo = "🌟 ¡Agente del cambio!";
+        mensaje = "Has completado las cinco misiones. Tus acciones pueden inspirar a otras personas.";
+    } else if (total >= 300) {
+        titulo = "💜 ¡Gran avance!";
+        mensaje = "Has acumulado muchos puntos. Continúa participando y promoviendo la igualdad.";
+    } else if (total >= 100) {
+        titulo = "💡 ¡Vas por buen camino!";
+        mensaje = "Estás construyendo nuevos aprendizajes. Sigue completando tus retos.";
+    }
+
+    document.getElementById("tituloMensaje").textContent = titulo;
+    document.getElementById("mensajeMotivador").textContent = mensaje;
+}
+
+// Ejecutar al abrir la página
+cargarPuntuacion();
+
+</script>
+
+</body>
+</html>

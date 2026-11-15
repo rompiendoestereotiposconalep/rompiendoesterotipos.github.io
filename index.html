@@ -1,0 +1,1137 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rompiendo estereotipos: aprende, juega y promueve la igualdad de género.">
+    <title>Rompiendo Estereotipos | ¡Tus capacidades no tienen género!</title>
+
+	<!--  /* =================================
+           AUTORES
+        ================================= */
+		
+		1. MAITE NAHOMI BRAVO JIMENEZ
+		2. ISSEY MIYAKE SOTO FELIX
+		3. JOSÉ DE JESUS PONCE MIRAMONTES
+		4. ANGEL AROCH ALVAREZ ALVARADO
+		5. BRYAN DAVID MORENO CASTILLO
+		6. DEREK NAHEL IBARRA ESQUEDA
+		
+		ASESOR: MAYRA ELIZABETH MENDOZA GUTIERREZ
+
+	-->
+    <style>
+        /* =================================
+           1. ESTILOS GENERALES
+        ================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --morado: #7045A5;
+            --morado-oscuro: #43266D;
+            --turquesa: #27B6AD;
+            --amarillo: #FFD166;
+            --coral: #F47C79;
+            --fondo: #F8F6FC;
+            --texto: #302A3D;
+            --blanco: #FFFFFF;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* =================================
+           2. BARRA DE NAVEGACIÓN
+        ================================= */
+
+        header {
+            background: var(--blanco);
+            padding: 15px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px #00000012;
+        }
+
+        .logo {
+            color: var(--morado);
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--turquesa);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        nav a {
+            color: var(--texto);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--morado);
+        }
+
+        .menu-btn {
+            display: none;
+            border: none;
+            background: var(--morado);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        /* =================================
+           3. PORTADA PRINCIPAL
+        ================================= */
+
+        .hero {
+            min-height: 510px;
+            padding: 70px 8%;
+            background: linear-gradient(
+                120deg,
+                #7045A5,
+                #9569C5,
+                #27B6AD
+            );
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 35px;
+        }
+
+        .hero-content {
+            max-width: 620px;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            background: var(--amarillo);
+            color: var(--morado-oscuro);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 58px);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--amarillo);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .hero-image {
+            font-size: 140px;
+            text-align: center;
+            min-width: 220px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-amarillo {
+            background: var(--amarillo);
+            color: var(--morado-oscuro);
+        }
+
+        .btn-morado {
+            background: var(--morado);
+            color: white;
+        }
+
+        /* =================================
+           4. SECCIONES GENERALES
+        ================================= */
+
+        section {
+            padding: 65px 8%;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .titulo-seccion h2 {
+            color: var(--morado);
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .titulo-seccion p {
+            color: #777;
+        }
+
+        /* =================================
+           5. PRESENTACIÓN DEL PROYECTO
+        ================================= */
+
+        .presentacion {
+            background: white;
+            text-align: center;
+        }
+
+        .presentacion-contenido {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .presentacion-contenido p {
+            margin-bottom: 18px;
+            font-size: 17px;
+        }
+
+        .mensaje {
+            background: #F0E8FA;
+            border-left: 6px solid var(--morado);
+            padding: 22px;
+            margin-top: 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: var(--morado-oscuro);
+        }
+
+        /* =================================
+           6. TARJETAS DE MÓDULOS
+        ================================= */
+
+        .modulos {
+            background: var(--fondo);
+        }
+
+        .contenedor-tarjetas {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 25px 18px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 5px 18px #0000000c;
+            transition: 0.3s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px #00000018;
+        }
+
+        .tarjeta .icono {
+            font-size: 43px;
+            margin-bottom: 12px;
+        }
+
+        .tarjeta h3 {
+            color: var(--morado);
+            margin-bottom: 10px;
+        }
+
+        .tarjeta p {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .tarjeta a {
+            color: var(--turquesa);
+            font-weight: bold;
+        }
+
+        /* =================================
+           7. RETO INTERACTIVO
+        ================================= */
+
+        .reto {
+            background: linear-gradient(135deg, #FCE8EE, #EEE7FA);
+        }
+
+        .reto-contenedor {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px #00000012;
+        }
+
+        .pregunta {
+            font-size: 21px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .opciones {
+            display: grid;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .opcion {
+            padding: 15px;
+            border: 2px solid #E4DCEE;
+            background: white;
+            border-radius: 10px;
+            font-size: 15px;
+            text-align: left;
+            transition: 0.2s;
+        }
+
+        .opcion:hover:not(:disabled) {
+            border-color: var(--morado);
+            background: #F5F0FA;
+        }
+
+        .opcion:disabled {
+            cursor: default;
+        }
+
+        .opcion.correcta {
+            background: #DDF5E4;
+            border-color: #279B51;
+        }
+
+        .opcion.incorrecta {
+            background: #FCE4E4;
+            border-color: #D84B4B;
+        }
+
+        #resultado {
+            margin: 15px 0;
+            font-weight: bold;
+            min-height: 30px;
+        }
+
+        #siguiente {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .marcador {
+            color: var(--morado);
+            font-weight: bold;
+        }
+
+        /* =================================
+           8. MENSAJE DE REFLEXIÓN
+        ================================= */
+
+        .reflexion {
+            background: white;
+            text-align: center;
+        }
+
+        .reflexion-contenido {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .frase {
+            font-size: 28px;
+            color: var(--morado);
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .compromiso {
+            background: #E0F5F1;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 25px;
+        }
+
+        /* =================================
+           9. PIE DE PÁGINA
+        ================================= */
+
+        footer {
+            background: var(--morado-oscuro);
+            color: white;
+            text-align: center;
+            padding: 35px 15px;
+        }
+
+        footer p {
+            margin: 7px 0;
+        }
+
+        /* =================================
+           10. DISEÑO RESPONSIVO
+        ================================= */
+
+        @media (max-width: 950px) {
+            .contenedor-tarjetas {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-wrap: wrap;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                align-items: flex-start;
+                padding: 15px 0;
+            }
+
+            nav.activo {
+                display: flex;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 55px 6%;
+            }
+
+            .hero-image {
+                font-size: 90px;
+                min-width: auto;
+            }
+
+            .contenedor-tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 45px 6%;
+            }
+
+            .reto-contenedor {
+                padding: 22px;
+            }
+
+            .frase {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =================================
+         ENCABEZADO Y MENÚ
+    ================================== -->
+
+    <header>
+
+        <a href="#inicio" class="logo">
+            💜 ROMPIENDO <span>ESTEREOTIPOS</span>
+        </a>
+
+        <button class="menu-btn" id="menuBtn"
+                aria-label="Abrir menú"
+                aria-expanded="false">
+            ☰
+        </button>
+
+        <nav id="menu">
+
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">El proyecto</a>
+            <a href="#modulos">Aprende y juega</a>
+            <a href="#reto">Reto</a>
+            <a href="#reflexion">Reflexiona</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =================================
+         PORTADA PRINCIPAL
+    ================================== -->
+
+    <main>
+
+    <section class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <span class="etiqueta">
+                🌎 PROYECTO STEM | IGUALDAD DE GÉNERO
+            </span>
+
+            <h1>
+                ¡ROMPIENDO <span>ESTEREOTIPOS!</span>
+            </h1>
+
+            <p>
+                Tus capacidades no tienen género.
+                Aprende, juega y descubre por qué
+                todas las personas merecemos las
+                mismas oportunidades.
+            </p>
+
+            <a href="#modulos" class="btn btn-amarillo">
+                ¡COMENZAR A JUGAR! 🚀
+            </a>
+
+        </div>
+
+        <div class="hero-image" aria-hidden="true">
+            👩‍💻 👨‍🔬
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         PRESENTACIÓN DEL PROYECTO
+    ================================== -->
+
+    <section class="presentacion" id="nosotros">
+
+        <div class="titulo-seccion">
+
+            <h2>¿De qué trata este proyecto?</h2>
+
+            <p>Conocer para cambiar, aprender para transformar.</p>
+
+        </div>
+
+        <div class="presentacion-contenido">
+
+            <p>
+                <strong>Rompiendo estereotipos</strong> es una
+                plataforma educativa interactiva que busca
+                promover la igualdad de género mediante
+                juegos, preguntas, desafíos y situaciones
+                de la vida cotidiana.
+            </p>
+
+            <p>
+                Aquí podrás descubrir cómo los estereotipos
+                pueden limitar las oportunidades de las
+                personas y aprender a reconocerlos para
+                construir una sociedad más justa.
+            </p>
+
+            <div class="mensaje">
+                💡 Recuerda: ninguna profesión, actividad,
+                habilidad o sueño pertenece exclusivamente
+                a un género.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         MÓDULOS EDUCATIVOS
+    ================================== -->
+
+    <section class="modulos" id="modulos">
+
+        <div class="titulo-seccion">
+
+            <h2>Explora nuestros módulos</h2>
+
+            <p>
+                ¡Elige una actividad y conviértete en
+                agente de cambio!
+            </p>
+
+        </div>
+
+        <div class="contenedor-tarjetas">
+
+            <article class="tarjeta">
+
+                <div class="icono">📚</div>
+
+                <h3>1. Aprende</h3>
+
+                <p>
+                    Descubre qué es la igualdad,
+                    la desigualdad y los estereotipos
+                    de género.
+                </p>
+
+                <a href="aprendizajes.html">Conocer más →</a>
+
+            </article>
+
+
+            <article class="tarjeta">
+
+                <div class="icono">🔎</div>
+
+                <h3>2. Identifica</h3>
+
+                <p>
+                    Aprende a reconocer frases y
+                    comportamientos que reproducen
+                    estereotipos.
+                </p>
+
+                <a href="identifica.html">Ir al reto →</a>
+
+            </article>
+
+
+            <article class="tarjeta">
+
+                <div class="icono">🎮</div>
+
+                <h3>3. Juega</h3>
+
+                <p>
+                    Pon a prueba tus conocimientos
+                    con preguntas de verdadero o falso
+                    y opción múltiple.
+                </p>
+
+                <a href="juego.html">Jugar ahora →</a>
+
+            </article>
+
+
+            <article class="tarjeta">
+
+                <div class="icono">👩‍🔧</div>
+
+                <h3>4. Profesiones</h3>
+
+                <p>
+                    Descubre por qué las profesiones
+                    y los talentos no tienen género.
+                </p>
+
+                <a href="profesiones.html">Explorar →</a>
+
+            </article>
+
+
+            <article class="tarjeta">
+
+                <div class="icono">💬</div>
+
+                <h3>5. Situaciones</h3>
+
+                <p>
+                    Analiza situaciones de desigualdad
+                    y decide cómo actuarías.
+                </p>
+
+                <a href="situaciones.html">Participar →</a>
+
+            </article>
+
+
+            <article class="tarjeta">
+
+                <div class="icono">🏆</div>
+
+                <h3>6. Misiones</h3>
+
+                <p>
+                    Supera desafíos y demuestra
+                    lo que has aprendido.
+                </p>
+
+                <a href="misiones.html">Comenzar →</a>
+
+            </article>
+
+
+            <article class="tarjeta">
+
+                <div class="icono">📝</div>
+
+                <h3>7. Evaluación</h3>
+
+                <p>
+                    Comprueba tus conocimientos
+                    sobre igualdad de género.
+                </p>
+
+                <a href="evaluacion.html">Evaluarme →</a>
+
+            </article>
+
+
+            <article class="tarjeta">
+
+                <div class="icono">🥇</div>
+
+                <h3>8. Mi resultado</h3>
+
+                <p>
+                    Conoce tus puntos y descubre
+                    cuánto has aprendido.
+                </p>
+
+                <a href="puntuacion.html">Mi puntuación →</a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         JUEGO INTERACTIVO
+    ================================== -->
+
+    <section class="reto" id="reto">
+
+        <div class="titulo-seccion">
+
+            <h2>🎮 ¡Pon a prueba tus conocimientos!</h2>
+
+            <p>
+                Reto: ¿Mito o realidad?
+            </p>
+
+        </div>
+
+        <div class="reto-contenedor">
+
+            <p class="marcador">
+                Pregunta <span id="numero">1</span> de 5
+            </p>
+
+            <p class="marcador">
+                ⭐ Puntos: <span id="puntos">0</span>
+            </p>
+
+            <div class="pregunta" id="pregunta">
+                ¿Las mujeres pueden desempeñarse
+                como ingenieras en robótica?
+            </div>
+
+            <div class="opciones" id="opciones">
+
+                <button class="opcion"
+                        onclick="responder(0)">
+                    A) No, porque es una profesión
+                    para hombres.
+                </button>
+
+                <button class="opcion"
+                        onclick="responder(1)">
+                    B) Sí, porque las capacidades
+                    profesionales no dependen
+                    del género.
+                </button>
+
+            </div>
+
+            <div id="resultado" role="status"
+                 aria-live="polite"></div>
+
+            <button class="btn btn-morado"
+                    id="siguiente"
+                    onclick="siguientePregunta()">
+                Siguiente pregunta →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         REFLEXIÓN FINAL
+    ================================== -->
+
+    <section class="reflexion" id="reflexion">
+
+        <div class="reflexion-contenido">
+
+            <div class="titulo-seccion">
+
+                <h2>💜 Cambiemos nuestra forma de pensar</h2>
+
+                <p>
+                    La igualdad comienza con nuestras acciones.
+                </p>
+
+            </div>
+
+            <div class="frase">
+                "No existen profesiones para hombres
+                o para mujeres, existen personas
+                con talentos, sueños y capacidades".
+            </div>
+
+            <p>
+                Cada persona tiene derecho a elegir
+                libremente su futuro, desarrollar sus
+                habilidades y participar en igualdad
+                de condiciones.
+            </p>
+
+            <div class="compromiso">
+
+                <h3>🌟 Mi compromiso con la igualdad</h3>
+
+                <p>
+                    Me comprometo a respetar las diferencias,
+                    evitar los prejuicios, rechazar la
+                    discriminación y promover la igualdad
+                    de oportunidades.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    </main>
+
+
+    <!-- =================================
+         PIE DE PÁGINA
+    ================================== -->
+
+    <footer>
+
+        <h2>💜 ROMPIENDO ESTEREOTIPOS</h2>
+
+        <p>¡Tus capacidades no tienen género!</p>
+
+        <p>
+            Proyecto STEM | Ciencia, Tecnología,
+            Ingeniería y Matemáticas
+        </p>
+
+        <p>
+            Desarrollado por estudiantes de CONALEP Plantel Mexicali II.
+        </p>
+
+        <p>© 2026 | Todos los derechos reservados.</p>
+
+    </footer>
+
+
+    <!-- =================================
+         JAVASCRIPT: FUNCIONALIDAD
+    ================================== -->
+
+    <script>
+
+        // MENÚ RESPONSIVO
+
+        const menuBtn = document.getElementById("menuBtn");
+        const menu = document.getElementById("menu");
+
+        menuBtn.addEventListener("click", function() {
+
+            const abierto = menu.classList.toggle("activo");
+
+            menuBtn.setAttribute("aria-expanded", abierto);
+
+        });
+
+        // CERRAR MENÚ AL SELECCIONAR UNA OPCIÓN
+
+        document.querySelectorAll("#menu a").forEach(enlace => {
+
+            enlace.addEventListener("click", function() {
+
+                menu.classList.remove("activo");
+                menuBtn.setAttribute("aria-expanded", "false");
+
+            });
+
+        });
+
+
+        // BANCO DE PREGUNTAS
+
+        const preguntas = [
+
+            {
+                pregunta: "¿Las mujeres pueden ser ingenieras en robótica?",
+                opciones: [
+                    "A) No, porque es una profesión para hombres.",
+                    "B) Sí, porque las capacidades no dependen del género."
+                ],
+                correcta: 1,
+                explicacion: "¡Correcto! La ingeniería es una profesión para cualquier persona con preparación e interés."
+            },
+
+            {
+                pregunta: "¿Los hombres pueden expresar sus emociones?",
+                opciones: [
+                    "A) Sí, todas las personas tienen derecho a expresar sus emociones.",
+                    "B) No, porque deben ser siempre fuertes."
+                ],
+                correcta: 0,
+                explicacion: "¡Muy bien! Expresar emociones es parte de la naturaleza humana y no depende del género."
+            },
+
+            {
+                pregunta: "¿Las tareas del hogar son responsabilidad de todos?",
+                opciones: [
+                    "A) No, son responsabilidad exclusiva de las mujeres.",
+                    "B) Sí, pueden compartirse entre todos los integrantes."
+                ],
+                correcta: 1,
+                explicacion: "¡Excelente! Las responsabilidades del hogar deben compartirse de manera equitativa."
+            },
+
+            {
+                pregunta: "¿Una mujer puede ser mecánica automotriz?",
+                opciones: [
+                    "A) Sí, cualquier persona puede desarrollar esa profesión.",
+                    "B) No, porque es un trabajo para hombres."
+                ],
+                correcta: 0,
+                explicacion: "¡Correcto! Las habilidades técnicas se desarrollan mediante aprendizaje y práctica."
+            },
+
+            {
+                pregunta: "¿Qué debemos hacer ante una situación de discriminación?",
+                opciones: [
+                    "A) Ignorarla y permitir que continúe.",
+                    "B) Promover el respeto, la igualdad y buscar apoyo cuando sea necesario."
+                ],
+                correcta: 1,
+                explicacion: "¡Excelente! Todas las personas podemos contribuir a construir espacios libres de discriminación."
+            }
+
+        ];
+
+
+        // VARIABLES DEL JUEGO
+
+        let preguntaActual = 0;
+        let puntos = 0;
+        let respondida = false;
+
+
+        // MOSTRAR PREGUNTA
+
+        function mostrarPregunta() {
+
+            respondida = false;
+
+            const pregunta = preguntas[preguntaActual];
+
+            document.getElementById("numero").textContent =
+                preguntaActual + 1;
+
+            document.getElementById("pregunta").textContent =
+                pregunta.pregunta;
+
+            document.getElementById("resultado").textContent = "";
+
+            document.getElementById("siguiente").style.display =
+                "none";
+
+            const contenedor = document.getElementById("opciones");
+
+            contenedor.innerHTML = "";
+
+            pregunta.opciones.forEach((opcion, indice) => {
+
+                const boton = document.createElement("button");
+
+                boton.className = "opcion";
+                boton.textContent = opcion;
+
+                boton.onclick = () => responder(indice);
+
+                contenedor.appendChild(boton);
+
+            });
+
+        }
+
+
+        // VALIDAR RESPUESTA
+
+        function responder(indice) {
+
+            if (respondida) return;
+
+            respondida = true;
+
+            const pregunta = preguntas[preguntaActual];
+
+            const botones = document.querySelectorAll(".opcion");
+
+            botones.forEach((boton, i) => {
+
+                boton.disabled = true;
+
+                if (i === pregunta.correcta) {
+                    boton.classList.add("correcta");
+                }
+
+                if (i === indice && indice !== pregunta.correcta) {
+                    boton.classList.add("incorrecta");
+                }
+
+            });
+
+            const resultado = document.getElementById("resultado");
+
+            if (indice === pregunta.correcta) {
+
+                puntos += 10;
+
+                resultado.textContent =
+                    "🎉 ¡Respuesta correcta! " + pregunta.explicacion;
+
+            } else {
+
+                resultado.textContent =
+                    "💡 ¡Sigue aprendiendo! " + pregunta.explicacion;
+
+            }
+
+            document.getElementById("puntos").textContent = puntos;
+
+            document.getElementById("siguiente").style.display =
+                "inline-block";
+
+            document.getElementById("siguiente").textContent =
+                preguntaActual === preguntas.length - 1
+                ? "Ver mi resultado 🏆"
+                : "Siguiente pregunta →";
+
+        }
+
+
+        // AVANZAR A LA SIGUIENTE PREGUNTA
+
+        function siguientePregunta() {
+
+            preguntaActual++;
+
+            if (preguntaActual < preguntas.length) {
+
+                mostrarPregunta();
+
+            } else {
+
+                mostrarResultado();
+
+            }
+
+        }
+
+
+        // MOSTRAR RESULTADO FINAL
+
+        function mostrarResultado() {
+
+            document.getElementById("numero").textContent = "5";
+
+            document.getElementById("pregunta").textContent =
+                "¡Has terminado el reto!";
+
+            document.getElementById("opciones").innerHTML = "";
+
+            document.getElementById("resultado").innerHTML =
+                "🏆 Obtuviste <strong>" + puntos +
+                " de 50 puntos</strong>.<br><br>" +
+                (puntos === 50
+                    ? "¡Excelente! Eres un agente de cambio."
+                    : puntos >= 30
+                    ? "¡Muy bien! Continúa promoviendo la igualdad."
+                    : "¡Buen esfuerzo! Sigue aprendiendo y cuestionando los estereotipos.");
+
+            const boton = document.getElementById("siguiente");
+
+            boton.textContent = "Volver a jugar 🔄";
+
+            boton.onclick = reiniciarJuego;
+
+        }
+
+
+        // REINICIAR JUEGO
+
+        function reiniciarJuego() {
+
+            preguntaActual = 0;
+            puntos = 0;
+
+            document.getElementById("puntos").textContent = puntos;
+
+            document.getElementById("siguiente").onclick =
+                siguientePregunta;
+
+            mostrarPregunta();
+
+        }
+
+    </script>
+
+</body>
+</html>

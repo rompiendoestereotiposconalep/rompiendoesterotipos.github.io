@@ -1,0 +1,1061 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluación | Rompiendo estereotipos</title>
+
+<style>
+:root {
+    --morado: #673ab7;
+    --morado-oscuro: #4527a0;
+    --turquesa: #20b8b0;
+    --amarillo: #ffd54f;
+    --coral: #ff796c;
+    --fondo: #f7f5fc;
+    --texto: #302b3d;
+    --blanco: #ffffff;
+    --verde: #2e9d68;
+    --rojo: #d94b55;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--blanco);
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    color: var(--morado);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: var(--turquesa);
+}
+
+.hero {
+    background: linear-gradient(135deg, var(--morado), #9575cd);
+    color: white;
+    text-align: center;
+    padding: 65px 20px;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: var(--amarillo);
+    color: #493600;
+    padding: 7px 17px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin-bottom: 12px;
+}
+
+.hero p {
+    max-width: 720px;
+    margin: auto;
+    font-size: 18px;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 950px;
+    margin: 45px auto;
+}
+
+h2 {
+    color: var(--morado);
+    margin-bottom: 15px;
+    font-size: 27px;
+}
+
+.introduccion {
+    background: white;
+    border-left: 6px solid var(--turquesa);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+.instrucciones {
+    background: #fff5d6;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 30px;
+}
+
+.panel-progreso {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+.datos-progreso {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.barra {
+    width: 100%;
+    height: 13px;
+    background: #e9e3f2;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progreso {
+    height: 100%;
+    width: 0%;
+    background: var(--turquesa);
+    transition: width .4s;
+}
+
+.pregunta {
+    background: white;
+    padding: 24px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+    border-left: 5px solid var(--turquesa);
+}
+
+.numero {
+    display: inline-block;
+    background: var(--morado);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.pregunta h3 {
+    color: var(--morado-oscuro);
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.opciones {
+    display: grid;
+    gap: 10px;
+}
+
+.opcion {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 13px;
+    border: 2px solid #e2dced;
+    border-radius: 9px;
+    background: white;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.opcion:hover {
+    border-color: var(--turquesa);
+    background: #effcfb;
+}
+
+.opcion input {
+    margin-top: 5px;
+    accent-color: var(--morado);
+}
+
+.opcion:has(input:checked) {
+    border-color: var(--morado);
+    background: #f3effb;
+}
+
+.boton {
+    display: inline-block;
+    border: none;
+    background: var(--morado);
+    color: white;
+    padding: 13px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 8px 5px;
+    font-size: 15px;
+}
+
+.boton:hover {
+    background: var(--morado-oscuro);
+}
+
+.boton-secundario {
+    background: var(--turquesa);
+}
+
+.boton-secundario:hover {
+    background: #138b85;
+}
+
+.boton:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.resultado {
+    display: none;
+    background: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 16px;
+    margin: 35px 0;
+    box-shadow: 0 5px 18px rgba(0,0,0,.08);
+}
+
+.resultado.visible {
+    display: block;
+}
+
+.calificacion {
+    color: var(--morado);
+    font-size: 55px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.detalle {
+    margin: 20px 0;
+    background: #f4f1fa;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.retro {
+    text-align: left;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 9px;
+}
+
+.retro.correcta {
+    background: #e2f6eb;
+    border-left: 5px solid var(--verde);
+}
+
+.retro.incorrecta {
+    background: #fde9e9;
+    border-left: 5px solid var(--rojo);
+}
+
+.reflexion {
+    background: linear-gradient(135deg, #d9f5f1, #fff1d1);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 40px 0;
+    text-align: center;
+}
+
+footer {
+    background: #302344;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 50px;
+}
+
+@media (max-width: 700px) {
+    header {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .contenedor {
+        width: 92%;
+    }
+
+    .pregunta {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">💜 Rompiendo estereotipos</div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="aprendizajes.html">Aprende</a>
+        <a href="identifica.html">Identifica</a>
+        <a href="juego.html">Juega</a>
+        <a href="profesiones.html">Profesiones</a>
+        <a href="situaciones.html">Situaciones</a>
+        <a href="misiones.html">Misiones</a>
+        <a href="#evaluacion">Evaluación</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <span class="etiqueta">MÓDULO 7 | EVALUACIÓN</span>
+    <h1>¡Demuestra lo que aprendiste!</h1>
+    <p>
+        Ha llegado el momento de poner a prueba tus conocimientos.
+        Responde las preguntas y demuestra que puedes reconocer
+        los estereotipos y promover la igualdad de género.
+    </p>
+</section>
+
+<main class="contenedor">
+
+    <section class="introduccion">
+        <h2>🎯 Evaluación de aprendizajes</h2>
+        <p>
+            A lo largo de este proyecto aprendiste a identificar
+            estereotipos, prejuicios y situaciones de discriminación.
+            También conociste profesiones STEM y reflexionaste sobre
+            la importancia de construir espacios inclusivos.
+        </p>
+        <br>
+        <p>
+            Esta evaluación te permitirá reconocer cuánto aprendiste
+            y qué temas puedes seguir fortaleciendo.
+        </p>
+    </section>
+
+    <section class="instrucciones">
+        <h3>📌 Instrucciones</h3>
+        <ol style="padding-left:22px; margin-top:10px;">
+            <li>Lee cada pregunta con atención.</li>
+            <li>Selecciona una sola respuesta por pregunta.</li>
+            <li>Contesta las 15 preguntas.</li>
+            <li>Presiona el botón «Finalizar evaluación».</li>
+            <li>Consulta tu calificación y la retroalimentación.</li>
+        </ol>
+
+        <p style="margin-top:12px;">
+            <strong>Valor:</strong> 15 preguntas. Cada respuesta
+            correcta vale aproximadamente 6.67 puntos.
+            Calificación máxima: 100.
+        </p>
+    </section>
+
+    <section id="evaluacion">
+
+        <div class="panel-progreso">
+            <div class="datos-progreso">
+                <span id="contador">Preguntas respondidas: 0 de 15</span>
+                <span id="porcentaje">0%</span>
+            </div>
+
+            <div class="barra">
+                <div class="progreso" id="barraProgreso"></div>
+            </div>
+        </div>
+
+        <form id="formEvaluacion">
+
+            <!-- PREGUNTA 1 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 1</span>
+                <h3>¿Qué es la igualdad de género?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p1" value="0">
+                        Que todas las personas deben realizar las mismas actividades sin excepción.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p1" value="1">
+                        Que todas las personas tengan los mismos derechos, oportunidades y trato, sin importar su género.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p1" value="2">
+                        Que únicamente las mujeres tengan oportunidades laborales.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 2 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 2</span>
+                <h3>¿Cuál de las siguientes opciones es un estereotipo de género?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p2" value="0">
+                        Todas las personas pueden desarrollar habilidades tecnológicas.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p2" value="1">
+                        Los hombres y las mujeres pueden realizar actividades domésticas.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p2" value="2">
+                        Las mujeres son mejores para cuidar niños y los hombres para trabajar con tecnología.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 3 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 3</span>
+                <h3>¿Qué diferencia existe entre un prejuicio y un estereotipo?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p3" value="0">
+                        El estereotipo es una creencia generalizada y el prejuicio es un juicio previo sobre una persona o grupo.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p3" value="1">
+                        Son exactamente lo mismo.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p3" value="2">
+                        El prejuicio siempre es positivo y el estereotipo siempre es negativo.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 4 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 4</span>
+                <h3>¿Qué significa discriminación por género?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p4" value="0">
+                        Reconocer las habilidades de todas las personas.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p4" value="1">
+                        Dar un trato desfavorable a una persona por su género.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p4" value="2">
+                        Promover la participación de todas las personas.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 5 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 5</span>
+                <h3>¿Cuál es una forma de promover la igualdad en el hogar?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p5" value="0">
+                        Asignar las tareas domésticas únicamente a las mujeres.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p5" value="1">
+                        Permitir que solo los hombres tomen decisiones.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p5" value="2">
+                        Distribuir las responsabilidades de manera equitativa.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 6 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 6</span>
+                <h3>¿Qué significa STEM?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p6" value="0">
+                        Ciencia, Tecnología, Ingeniería y Matemáticas.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p6" value="1">
+                        Sociedad, Trabajo, Educación y Música.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p6" value="2">
+                        Sistemas, Técnicas, Estudios y Métodos.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 7 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 7</span>
+                <h3>¿Cuál de estas acciones promueve la igualdad en la tecnología?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p7" value="0">
+                        Permitir que solo los hombres participen en robótica.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p7" value="1">
+                        Brindar las mismas oportunidades para aprender programación y robótica.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p7" value="2">
+                        Evitar que las mujeres utilicen equipos tecnológicos.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 8 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 8</span>
+                <h3>¿Quién puede desempeñarse como ingeniero o ingeniera en informática?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p8" value="0">
+                        Únicamente los hombres.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p8" value="1">
+                        Únicamente las mujeres.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p8" value="2">
+                        Cualquier persona que desarrolle los conocimientos y habilidades necesarios.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 9 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 9</span>
+                <h3>¿Cuál es un ejemplo de discriminación laboral?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p9" value="0">
+                        Rechazar a una candidata preparada únicamente por ser mujer.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p9" value="1">
+                        Contratar a una persona por su experiencia.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p9" value="2">
+                        Ofrecer capacitación a todo el personal.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 10 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 10</span>
+                <h3>¿Por qué es importante conocer a mujeres y hombres destacados en STEM?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p10" value="0">
+                        Para establecer qué género es más inteligente.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p10" value="1">
+                        Para reconocer aportaciones diversas y demostrar que las capacidades no dependen del género.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p10" value="2">
+                        Para limitar las profesiones a determinados grupos.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 11 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 11</span>
+                <h3>¿Qué debes hacer cuando escuchas un comentario que reproduce un estereotipo?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p11" value="0">
+                        Repetirlo para que otras personas lo escuchen.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p11" value="1">
+                        Ignorarlo siempre, aunque afecte a alguien.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p11" value="2">
+                        Cuestionarlo respetuosamente y promover información basada en hechos.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 12 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 12</span>
+                <h3>¿Qué es una distribución equitativa de responsabilidades?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p12" value="0">
+                        Repartir las actividades considerando capacidades, acuerdos y oportunidades, sin imponer roles por género.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p12" value="1">
+                        Asignar todas las tareas a una sola persona.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p12" value="2">
+                        Evitar que las personas participen en actividades diferentes.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 13 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 13</span>
+                <h3>¿Cuál es el propósito de romper los estereotipos de género?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p13" value="0">
+                        Hacer que todas las personas tengan los mismos gustos.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p13" value="1">
+                        Evitar que las personas elijan libremente sus actividades.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p13" value="2">
+                        Eliminar ideas limitantes y favorecer la libertad y la igualdad de oportunidades.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 14 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 14</span>
+                <h3>¿Qué característica debe tener un equipo de trabajo inclusivo?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p14" value="0">
+                        Escuchar las ideas, respetar las diferencias y ofrecer oportunidades de participación.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p14" value="1">
+                        Permitir que solamente una persona tome todas las decisiones.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p14" value="2">
+                        Asignar funciones de acuerdo con el género.
+                    </label>
+                </div>
+            </article>
+
+            <!-- PREGUNTA 15 -->
+            <article class="pregunta">
+                <span class="numero">PREGUNTA 15</span>
+                <h3>¿Cuál es el mensaje principal de este proyecto?</h3>
+
+                <div class="opciones">
+                    <label class="opcion">
+                        <input type="radio" name="p15" value="0">
+                        Las profesiones deben elegirse según el género.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p15" value="1">
+                        Las capacidades, los talentos y las oportunidades no tienen género.
+                    </label>
+
+                    <label class="opcion">
+                        <input type="radio" name="p15" value="2">
+                        Algunas actividades son exclusivas de hombres o mujeres.
+                    </label>
+                </div>
+            </article>
+
+            <div style="text-align:center; margin:30px 0;">
+                <button type="button" class="boton" id="finalizar"
+                    onclick="finalizarEvaluacion()">
+                    Finalizar evaluación
+                </button>
+            </div>
+
+        </form>
+    </section>
+
+    <section class="resultado" id="resultado">
+        <h2>🎉 Resultado de tu evaluación</h2>
+
+        <p>Tu calificación final es:</p>
+
+        <div class="calificacion" id="calificacion">0</div>
+
+        <p id="mensaje"></p>
+
+        <div class="detalle">
+            <p><strong>Respuestas correctas:</strong> <span id="correctas"></span> de 15</p>
+            <p><strong>Respuestas incorrectas:</strong> <span id="incorrectas"></span></p>
+            <p><strong>Porcentaje de aciertos:</strong> <span id="aciertos"></span>%</p>
+        </div>
+
+        <h3 style="color:var(--morado); margin-top:25px;">
+            Revisión de tus respuestas
+        </h3>
+
+        <div id="retroalimentacion"></div>
+
+        <button class="boton" onclick="reiniciarEvaluacion()">
+            Repetir evaluación
+        </button>
+
+        <a href="resultado.html" class="boton boton-secundario">
+            Ver mi resultado general →
+        </a>
+    </section>
+
+    <section class="reflexion">
+        <h2>💭 Reflexión final</h2>
+        <p>
+            La igualdad de género no consiste solamente en conocer
+            conceptos, sino en ponerlos en práctica.
+        </p>
+        <br>
+        <p>
+            Piensa en una acción que puedas realizar desde hoy
+            para contribuir a una sociedad donde todas las personas
+            tengan las mismas oportunidades.
+        </p>
+        <br>
+        <strong>¡Tus capacidades no tienen género!</strong>
+    </section>
+
+    <div style="text-align:center; margin:35px 0;">
+        <a href="misiones.html" class="boton">
+            ← Misiones
+        </a>
+
+        <a href="index.html" class="boton boton-secundario">
+            Volver al inicio
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    <p><strong>ROMPIENDO ESTEREOTIPOS</strong></p>
+    <p>¡Tus capacidades no tienen género!</p>
+    <p>Proyecto STEM | Ciencia, Tecnología, Ingeniería y Matemáticas</p>
+</footer>
+
+<script>
+
+// Respuestas correctas
+const respuestas = {
+    p1: 1,
+    p2: 2,
+    p3: 0,
+    p4: 1,
+    p5: 2,
+    p6: 0,
+    p7: 1,
+    p8: 2,
+    p9: 0,
+    p10: 1,
+    p11: 2,
+    p12: 0,
+    p13: 2,
+    p14: 0,
+    p15: 1
+};
+
+// Explicaciones de las respuestas
+const explicaciones = {
+    p1: "La igualdad de género busca garantizar los mismos derechos, oportunidades y trato para todas las personas.",
+    p2: "Es un estereotipo porque atribuye habilidades o responsabilidades a las personas según su género.",
+    p3: "El estereotipo es una creencia generalizada; el prejuicio es una valoración o juicio previo.",
+    p4: "La discriminación implica un trato desfavorable por una característica personal, como el género.",
+    p5: "Las responsabilidades domésticas deben compartirse de manera equitativa.",
+    p6: "STEM corresponde a Science, Technology, Engineering and Mathematics: Ciencia, Tecnología, Ingeniería y Matemáticas.",
+    p7: "La participación en tecnología debe estar abierta a todas las personas.",
+    p8: "La formación, los conocimientos y las habilidades permiten desarrollar una profesión, no el género.",
+    p9: "Negar una oportunidad laboral por ser mujer constituye discriminación.",
+    p10: "Conocer referentes diversos permite reconocer aportaciones y cuestionar ideas limitantes.",
+    p11: "Cuestionar respetuosamente los prejuicios ayuda a construir una convivencia más justa.",
+    p12: "La equidad implica distribuir oportunidades y responsabilidades sin imponer roles por género.",
+    p13: "Romper estereotipos permite que cada persona desarrolle sus capacidades y tome decisiones libremente.",
+    p14: "Un equipo inclusivo escucha, respeta y permite que todas las personas participen.",
+    p15: "El proyecto promueve la idea de que el talento y las capacidades no dependen del género."
+};
+
+const CLAVE_RESULTADO = "rompiendoEstereotiposEvaluacion";
+
+let evaluacionTerminada = false;
+
+// Actualizar progreso al seleccionar respuestas
+document.querySelectorAll(
+    '#formEvaluacion input[type="radio"]'
+).forEach(input => {
+    input.addEventListener("change", actualizarProgreso);
+});
+
+function actualizarProgreso() {
+
+    let respondidas = 0;
+
+    for (let i = 1; i <= 15; i++) {
+        if (document.querySelector('input[name="p' + i + '"]:checked')) {
+            respondidas++;
+        }
+    }
+
+    const porcentaje = Math.round((respondidas / 15) * 100);
+
+    document.getElementById("contador").textContent =
+        "Preguntas respondidas: " + respondidas + " de 15";
+
+    document.getElementById("porcentaje").textContent =
+        porcentaje + "%";
+
+    document.getElementById("barraProgreso").style.width =
+        porcentaje + "%";
+}
+
+function finalizarEvaluacion() {
+
+    if (evaluacionTerminada) return;
+
+    let respondidas = 0;
+    let correctas = 0;
+    let detalle = "";
+
+    for (let i = 1; i <= 15; i++) {
+
+        const nombre = "p" + i;
+
+        const seleccionada = document.querySelector(
+            'input[name="' + nombre + '"]:checked'
+        );
+
+        if (!seleccionada) {
+            continue;
+        }
+
+        respondidas++;
+
+        const valor = Number(seleccionada.value);
+        const correcta = respuestas[nombre];
+
+        const articulo = seleccionada.closest(".pregunta");
+
+        const opciones = articulo.querySelectorAll(
+            'input[name="' + nombre + '"]'
+        );
+
+        opciones.forEach(input => {
+            input.disabled = true;
+        });
+
+        if (valor === correcta) {
+            correctas++;
+            detalle += `
+                <div class="retro correcta">
+                    <strong>Pregunta ${i}: ✔ Correcta</strong>
+                    <p>${explicaciones[nombre]}</p>
+                </div>
+            `;
+        } else {
+            detalle += `
+                <div class="retro incorrecta">
+                    <strong>Pregunta ${i}: ✘ Incorrecta</strong>
+                    <p>${explicaciones[nombre]}</p>
+                </div>
+            `;
+        }
+    }
+
+    if (respondidas < 15) {
+        alert(
+            "Te faltan " + (15 - respondidas) +
+            " preguntas por responder. Completa toda la evaluación."
+        );
+
+        const primeraSinResponder = document.querySelector(
+            '#formEvaluacion input:not(:checked):not(:disabled)'
+        );
+
+        if (primeraSinResponder) {
+            primeraSinResponder.closest(".pregunta").scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+
+        return;
+    }
+
+    evaluacionTerminada = true;
+
+    const calificacion = Math.round((correctas / 15) * 100);
+    const incorrectas = 15 - correctas;
+
+    let mensaje = "";
+
+    if (calificacion >= 90) {
+        mensaje = "¡Excelente! Demuestras un gran dominio de los temas.";
+    } else if (calificacion >= 80) {
+        mensaje = "¡Muy bien! Comprendes los principales conceptos.";
+    } else if (calificacion >= 70) {
+        mensaje = "¡Buen trabajo! Has logrado los aprendizajes fundamentales.";
+    } else if (calificacion >= 60) {
+        mensaje = "Sigue esforzándote. Te recomendamos revisar los módulos anteriores.";
+    } else {
+        mensaje = "Te invitamos a repasar el contenido y realizar nuevamente la evaluación.";
+    }
+
+    document.getElementById("calificacion").textContent =
+        calificacion;
+
+    document.getElementById("mensaje").textContent = mensaje;
+
+    document.getElementById("correctas").textContent = correctas;
+    document.getElementById("incorrectas").textContent = incorrectas;
+    document.getElementById("aciertos").textContent = calificacion;
+
+    document.getElementById("retroalimentacion").innerHTML = detalle;
+
+    // Guardar el resultado para la página de resultados
+    const resultado = {
+        calificacion: calificacion,
+        correctas: correctas,
+        incorrectas: incorrectas,
+        total: 15,
+        fecha: new Date().toLocaleString("es-MX")
+    };
+
+    localStorage.setItem(
+        CLAVE_RESULTADO,
+        JSON.stringify(resultado)
+    );
+
+    document.getElementById("resultado").classList.add("visible");
+
+    document.getElementById("finalizar").disabled = true;
+
+    document.getElementById("resultado").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+function reiniciarEvaluacion() {
+
+    if (!confirm("¿Deseas repetir la evaluación? El resultado anterior será reemplazado.")) {
+        return;
+    }
+
+    document.getElementById("formEvaluacion").reset();
+
+    document.querySelectorAll(
+        '#formEvaluacion input[type="radio"]'
+    ).forEach(input => {
+        input.disabled = false;
+    });
+
+    evaluacionTerminada = false;
+
+    document.getElementById("resultado").classList.remove("visible");
+    document.getElementById("finalizar").disabled = false;
+
+    actualizarProgreso();
+
+    document.getElementById("evaluacion").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+actualizarProgreso();
+
+</script>
+
+</body>
+</html>

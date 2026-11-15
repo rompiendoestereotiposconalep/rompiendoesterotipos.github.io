@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Situaciones | Rompiendo estereotipos</title>
+
+<style>
+:root {
+    --morado: #673ab7;
+    --morado-oscuro: #4527a0;
+    --turquesa: #20b8b0;
+    --amarillo: #ffd54f;
+    --coral: #ff796c;
+    --fondo: #f7f5fc;
+    --texto: #302b3d;
+    --blanco: #ffffff;
+    --verde: #2e9d68;
+    --rojo: #d94b55;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--blanco);
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    color: var(--morado);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: var(--turquesa);
+}
+
+.hero {
+    background: linear-gradient(135deg, var(--morado), #9575cd);
+    color: white;
+    text-align: center;
+    padding: 65px 20px;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: var(--amarillo);
+    color: #493600;
+    padding: 7px 17px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin-bottom: 12px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+    font-size: 18px;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 1050px;
+    margin: 45px auto;
+}
+
+h2 {
+    color: var(--morado);
+    margin-bottom: 15px;
+    font-size: 27px;
+}
+
+.introduccion {
+    background: white;
+    border-left: 6px solid var(--turquesa);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+.instruccion {
+    background: #fff5d6;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.situacion {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.06);
+    border-top: 5px solid var(--turquesa);
+}
+
+.numero {
+    display: inline-block;
+    background: var(--morado);
+    color: white;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.categoria {
+    color: var(--turquesa);
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.situacion h3 {
+    color: var(--morado-oscuro);
+    margin-bottom: 12px;
+    font-size: 21px;
+}
+
+.caso {
+    background: #f4f1fa;
+    padding: 17px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.pregunta {
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.opciones {
+    display: grid;
+    gap: 10px;
+}
+
+.opcion {
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 13px 15px;
+    border: 2px solid #e2dced;
+    border-radius: 9px;
+    background: white;
+    color: var(--texto);
+    font-size: 15px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.opcion:hover:not(:disabled) {
+    border-color: var(--turquesa);
+    background: #effcfb;
+}
+
+.opcion:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.opcion.correcta {
+    background: #e2f6eb;
+    border-color: var(--verde);
+    color: #17643e;
+    font-weight: bold;
+}
+
+.opcion.incorrecta {
+    background: #fde9e9;
+    border-color: var(--rojo);
+    color: #a32630;
+}
+
+.retroalimentacion {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 9px;
+    background: #edf8f5;
+    border-left: 5px solid var(--turquesa);
+}
+
+.retroalimentacion.visible {
+    display: block;
+}
+
+.retroalimentacion strong {
+    color: var(--morado);
+}
+
+.resultado {
+    display: none;
+    background: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 16px;
+    margin: 35px 0;
+    box-shadow: 0 5px 18px rgba(0,0,0,.08);
+}
+
+.resultado.visible {
+    display: block;
+}
+
+.puntuacion {
+    color: var(--morado);
+    font-size: 42px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.barra {
+    width: 100%;
+    height: 13px;
+    background: #e9e3f2;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progreso {
+    height: 100%;
+    width: 0%;
+    background: var(--turquesa);
+    transition: width .4s;
+}
+
+.boton {
+    display: inline-block;
+    border: none;
+    background: var(--morado);
+    color: white;
+    padding: 13px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 8px 5px;
+    font-size: 15px;
+}
+
+.boton:hover {
+    background: var(--morado-oscuro);
+}
+
+.boton-secundario {
+    background: var(--turquesa);
+}
+
+.boton-secundario:hover {
+    background: #138b85;
+}
+
+.reflexion {
+    background: linear-gradient(135deg, #d9f5f1, #fff1d1);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 40px 0;
+    text-align: center;
+}
+
+.reflexion h2 {
+    color: var(--morado);
+}
+
+footer {
+    background: #302344;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 50px;
+}
+
+@media (max-width: 700px) {
+    header {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .contenedor {
+        width: 92%;
+    }
+
+    .situacion {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">💜 Rompiendo estereotipos</div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="aprendizajes.html">Aprende</a>
+        <a href="identifica.html">Identifica</a>
+        <a href="juego.html">Juega</a>
+        <a href="profesiones.html">Profesiones</a>
+        <a href="#actividad">Situaciones</a>
+        <a href="evaluacion.html">Evaluación</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <span class="etiqueta">MÓDULO 5 | SITUACIONES</span>
+    <h1>¿Qué harías tú?</h1>
+    <p>
+        Analiza situaciones de la vida cotidiana, identifica las
+        desigualdades y descubre cómo puedes actuar para construir
+        espacios más justos e inclusivos.
+    </p>
+</section>
+
+<main class="contenedor">
+
+    <section class="introduccion">
+        <h2>Aprender también significa actuar</h2>
+        <p>
+            Los estereotipos de género pueden aparecer en nuestra casa,
+            escuela, comunidad y espacios de trabajo. Algunas veces se
+            expresan mediante comentarios, decisiones o comportamientos
+            que limitan las oportunidades de las personas.
+        </p>
+        <br>
+        <p>
+            En este módulo conocerás diferentes situaciones y tendrás
+            que analizar cada una para elegir una respuesta que promueva
+            el respeto, la igualdad y la inclusión.
+        </p>
+    </section>
+
+    <section class="instruccion">
+        <h3>📌 Instrucciones</h3>
+        <ol style="padding-left: 22px;">
+            <li>Lee cuidadosamente cada situación.</li>
+            <li>Identifica el problema que se presenta.</li>
+            <li>Selecciona la respuesta que consideres más adecuada.</li>
+            <li>Lee la retroalimentación para comprender tu elección.</li>
+            <li>Al finalizar, consulta tu puntuación.</li>
+        </ol>
+        <p style="margin-top:10px;">
+            <strong>Valor:</strong> 25 puntos por respuesta correcta.
+            Puntuación máxima: 100 puntos.
+        </p>
+    </section>
+
+    <section id="actividad">
+        <h2>🧩 Resuelve las situaciones</h2>
+        <p style="margin-bottom:20px;">
+            Selecciona una respuesta en cada caso. ¡Demuestra que puedes
+            identificar y romper los estereotipos!
+        </p>
+
+        <div class="barra">
+            <div class="progreso" id="progreso"></div>
+        </div>
+        <p id="avance" style="margin-bottom:20px; font-weight:bold;">
+            Situaciones respondidas: 0 de 4
+        </p>
+
+        <!-- SITUACIÓN 1 -->
+        <article class="situacion" data-respuesta="1">
+            <span class="numero">SITUACIÓN 1</span>
+            <p class="categoria">🏠 ÁMBITO FAMILIAR</p>
+            <h3>Las tareas del hogar</h3>
+
+            <div class="caso">
+                En una familia, los padres piden únicamente a las hijas
+                que preparen la comida y limpien la casa, mientras que
+                a los hijos varones les permiten descansar porque
+                consideran que esas actividades son responsabilidad
+                de las mujeres.
+            </div>
+
+            <p class="pregunta">
+                ¿Qué situación se presenta y cuál sería la mejor solución?
+            </p>
+
+            <div class="opciones">
+                <button class="opcion" onclick="responder(this, 0, 1)">
+                    A) Es una distribución adecuada porque cada género
+                    tiene responsabilidades diferentes.
+                </button>
+
+                <button class="opcion" onclick="responder(this, 1, 1)">
+                    B) Es un estereotipo de género. Las tareas deben
+                    distribuirse de manera equitativa entre todos.
+                </button>
+
+                <button class="opcion" onclick="responder(this, 2, 1)">
+                    C) No existe ningún problema porque ocurre dentro
+                    de una familia.
+                </button>
+            </div>
+
+            <div class="retroalimentacion" id="retro1">
+                <strong>Explicación:</strong>
+                Asignar las tareas del hogar únicamente a las mujeres
+                reproduce el estereotipo de que son responsables del
+                cuidado doméstico. Las actividades deben repartirse
+                considerando las capacidades, disponibilidad y
+                responsabilidades de cada integrante, sin distinción
+                de género.
+            </div>
+        </article>
+
+        <!-- SITUACIÓN 2 -->
+        <article class="situacion" data-respuesta="2">
+            <span class="numero">SITUACIÓN 2</span>
+            <p class="categoria">🏫 ÁMBITO ESCOLAR</p>
+            <h3>El equipo de robótica</h3>
+
+            <div class="caso">
+                En una clase de informática, un equipo debe construir
+                un prototipo de robot. Algunos compañeros proponen que
+                los hombres se encarguen de programar y conectar los
+                circuitos, mientras que las mujeres deben decorar la
+                presentación porque consideran que ellas tienen
+                mayor habilidad para esas tareas.
+            </div>
+
+            <p class="pregunta">
+                ¿Cuál sería la acción más apropiada?
+            </p>
+
+            <div class="opciones">
+                <button class="opcion" onclick="responder(this, 0, 2)">
+                    A) Aceptar la distribución porque así se trabaja
+                    más rápido.
+                </button>
+
+                <button class="opcion" onclick="responder(this, 1, 2)">
+                    B) Permitir que solamente los hombres utilicen
+                    los componentes electrónicos.
+                </button>
+
+                <button class="opcion" onclick="responder(this, 2, 2)">
+                    C) Distribuir las actividades según los intereses
+                    y habilidades de cada integrante, permitiendo
+                    que todos aprendan.
+                </button>
+            </div>
+
+            <div class="retroalimentacion" id="retro2">
+                <strong>Explicación:</strong>
+                La programación, la robótica y el diseño no son
+                actividades exclusivas de un género. Todos los
+                estudiantes deben tener las mismas oportunidades
+                para experimentar, aprender y desarrollar habilidades
+                tecnológicas.
+            </div>
+        </article>
+
+        <!-- SITUACIÓN 3 -->
+        <article class="situacion" data-respuesta="1">
+            <span class="numero">SITUACIÓN 3</span>
+            <p class="categoria">💼 ÁMBITO LABORAL</p>
+            <h3>Una oportunidad de liderazgo</h3>
+
+            <div class="caso">
+                Una empresa necesita contratar a una persona para
+                dirigir un proyecto tecnológico. Una candidata cuenta
+                con la preparación y experiencia necesarias, pero
+                durante la entrevista le comentan que prefieren
+                contratar a un hombre porque consideran que tiene
+                mayor autoridad para dirigir equipos.
+            </div>
+
+            <p class="pregunta">
+                ¿Qué problema se identifica?
+            </p>
+
+            <div class="opciones">
+                <button class="opcion" onclick="responder(this, 0, 3)">
+                    A) Una decisión profesional basada en la experiencia.
+                </button>
+
+                <button class="opcion" onclick="responder(this, 1, 3)">
+                    B) Discriminación por género. La selección debe
+                    basarse en competencias y experiencia.
+                </button>
+
+                <button class="opcion" onclick="responder(this, 2, 3)">
+                    C) Una decisión que no afecta la igualdad de
+                    oportunidades.
+                </button>
+            </div>
+
+            <div class="retroalimentacion" id="retro3">
+                <strong>Explicación:</strong>
+                Negar una oportunidad laboral por el género de una
+                persona constituye discriminación. Las capacidades
+                de liderazgo deben evaluarse mediante conocimientos,
+                experiencia, habilidades y resultados, no mediante
+                prejuicios.
+            </div>
+        </article>
+
+        <!-- SITUACIÓN 4 -->
+        <article class="situacion" data-respuesta="0">
+            <span class="numero">SITUACIÓN 4</span>
+            <p class="categoria">💻 ÁMBITO TECNOLÓGICO</p>
+            <h3>Una estudiante programadora</h3>
+
+            <div class="caso">
+                Una estudiante participa en un concurso de desarrollo
+                de aplicaciones. Al presentar su proyecto, una persona
+                comenta que le sorprende que una mujer pueda programar
+                tan bien y que normalmente esa actividad es para hombres.
+            </div>
+
+            <p class="pregunta">
+                ¿Cómo debería responder la estudiante o su equipo?
+            </p>
+
+            <div class="opciones">
+                <button class="opcion" onclick="responder(this, 0, 4)">
+                    A) Explicar que la programación es una habilidad
+                    que cualquier persona puede desarrollar y que
+                    el talento no depende del género.
+                </button>
+
+                <button class="opcion" onclick="responder(this, 1, 4)">
+                    B) Aceptar el comentario porque es una opinión
+                    personal.
+                </button>
+
+                <button class="opcion" onclick="responder(this, 2, 4)">
+                    C) Evitar que otras mujeres participen en
+                    actividades de programación.
+                </button>
+            </div>
+
+            <div class="retroalimentacion" id="retro4">
+                <strong>Explicación:</strong>
+                La programación y las demás disciplinas tecnológicas
+                están abiertas a todas las personas. Reconocer el
+                talento, cuestionar los prejuicios y promover la
+                participación ayuda a construir espacios tecnológicos
+                más inclusivos.
+            </div>
+        </article>
+
+    </section>
+
+    <section class="resultado" id="resultado">
+        <h2>🎉 ¡Has terminado el módulo!</h2>
+        <p>Tu puntuación en las situaciones fue:</p>
+        <div class="puntuacion" id="puntuacion">0 / 100</div>
+        <p id="mensaje"></p>
+
+        <div class="barra">
+            <div class="progreso" id="progresoFinal"></div>
+        </div>
+
+        <button class="boton" onclick="reiniciar()">
+            Volver a intentar
+        </button>
+
+        <a href="misiones.html" class="boton boton-secundario">
+            Continuar a Misiones →
+        </a>
+    </section>
+
+    <section class="reflexion">
+        <h2>💭 Reflexiona</h2>
+        <p>
+            ¿Alguna vez has presenciado una situación en la que una
+            persona haya recibido un trato diferente por ser hombre
+            o mujer?
+        </p>
+        <br>
+        <p>
+            ¿Qué podrías hacer para evitar que los estereotipos
+            limiten las oportunidades de otras personas?
+        </p>
+        <br>
+        <p><strong>
+            Recuerda: la igualdad comienza con nuestras acciones
+            cotidianas.
+        </strong></p>
+    </section>
+
+    <div style="text-align:center; margin:35px 0;">
+        <a href="profesiones.html" class="boton">
+            ← Profesiones
+        </a>
+
+        <a href="index.html" class="boton boton-secundario">
+            Volver al inicio
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    <p><strong>ROMPIENDO ESTEREOTIPOS</strong></p>
+    <p>¡Tus capacidades no tienen género!</p>
+    <p>Proyecto STEM | Ciencia, Tecnología, Ingeniería y Matemáticas</p>
+</footer>
+
+<script>
+let puntuacion = 0;
+let respondidas = 0;
+let contestadas = [];
+
+function responder(boton, opcion, numero) {
+
+    // Evitar responder dos veces la misma situación
+    if (contestadas.includes(numero)) {
+        return;
+    }
+
+    contestadas.push(numero);
+    respondidas++;
+
+    const articulo = boton.closest(".situacion");
+    const respuestaCorrecta = Number(articulo.dataset.respuesta);
+    const botones = articulo.querySelectorAll(".opcion");
+    const retro = document.getElementById("retro" + numero);
+
+    botones.forEach((b, indice) => {
+        b.disabled = true;
+
+        if (indice === respuestaCorrecta) {
+            b.classList.add("correcta");
+        }
+    });
+
+    if (opcion === respuestaCorrecta) {
+        puntuacion += 25;
+        boton.classList.add("correcta");
+        retro.innerHTML =
+            "<strong>¡Excelente respuesta! ✔</strong><br>" +
+            retro.innerHTML;
+    } else {
+        boton.classList.add("incorrecta");
+        retro.innerHTML =
+            "<strong>Respuesta incorrecta. Sigue aprendiendo.</strong><br>" +
+            retro.innerHTML;
+    }
+
+    retro.classList.add("visible");
+
+    actualizarProgreso();
+
+    if (respondidas === 4) {
+        mostrarResultado();
+    }
+}
+
+function actualizarProgreso() {
+    const porcentaje = (respondidas / 4) * 100;
+
+    document.getElementById("progreso").style.width =
+        porcentaje + "%";
+
+    document.getElementById("avance").textContent =
+        "Situaciones respondidas: " + respondidas + " de 4";
+}
+
+function mostrarResultado() {
+
+    const resultado = document.getElementById("resultado");
+
+    document.getElementById("puntuacion").textContent =
+        puntuacion + " / 100";
+
+    document.getElementById("progresoFinal").style.width =
+        puntuacion + "%";
+
+    let mensaje = "";
+
+    if (puntuacion === 100) {
+        mensaje = "¡Excelente! Identificas los estereotipos y sabes cómo promover la igualdad.";
+    } else if (puntuacion >= 75) {
+        mensaje = "¡Muy bien! Tienes una buena comprensión de la igualdad de género.";
+    } else if (puntuacion >= 50) {
+        mensaje = "Buen esfuerzo. Continúa aprendiendo y reflexionando sobre estas situaciones.";
+    } else {
+        mensaje = "Te invitamos a revisar los módulos anteriores y volver a intentarlo.";
+    }
+
+    document.getElementById("mensaje").textContent = mensaje;
+
+    resultado.classList.add("visible");
+
+    resultado.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+function reiniciar() {
+
+    puntuacion = 0;
+    respondidas = 0;
+    contestadas = [];
+
+    document.querySelectorAll(".opcion").forEach(boton => {
+        boton.disabled = false;
+        boton.classList.remove("correcta", "incorrecta");
+    });
+
+    document.querySelectorAll(".retroalimentacion").forEach(retro => {
+        retro.classList.remove("visible");
+    });
+
+    document.getElementById("resultado").classList.remove("visible");
+
+    actualizarProgreso();
+
+    document.getElementById("actividad").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+</script>
+
+</body>
+</html>

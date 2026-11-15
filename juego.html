@@ -1,0 +1,1369 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Juega | Rompiendo estereotipos</title>
+
+<style>
+:root {
+    --morado: #713b91;
+    --oscuro: #49245f;
+    --turquesa: #26b8b0;
+    --amarillo: #ffce55;
+    --coral: #ff786e;
+    --fondo: #f8f5fc;
+    --texto: #342b3c;
+    --blanco: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--oscuro);
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+header h2 {
+    font-size: 21px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: var(--amarillo);
+}
+
+.hero {
+    background: linear-gradient(135deg, #713b91, #a56bc2);
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.hero h1 {
+    font-size: clamp(32px, 5vw, 50px);
+    margin: 15px 0;
+}
+
+.hero p {
+    max-width: 750px;
+    margin: auto;
+    font-size: 18px;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: var(--amarillo);
+    color: var(--oscuro);
+    padding: 7px 18px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.boton {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    background: var(--amarillo);
+    color: var(--oscuro);
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.boton:hover {
+    transform: translateY(-3px);
+    background: white;
+}
+
+section {
+    padding: 55px 8%;
+}
+
+.titulo {
+    text-align: center;
+    color: var(--morado);
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.subtitulo {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 35px;
+}
+
+.juegos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+}
+
+.tarjeta {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    text-align: center;
+    border-top: 6px solid var(--turquesa);
+}
+
+.tarjeta:nth-child(2) {
+    border-color: var(--coral);
+}
+
+.tarjeta:nth-child(3) {
+    border-color: var(--amarillo);
+}
+
+.icono {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.tarjeta h3 {
+    color: var(--morado);
+    margin-bottom: 10px;
+}
+
+.juego {
+    display: none;
+    background: white;
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+}
+
+.juego.activo {
+    display: block;
+}
+
+.juego h2 {
+    color: var(--morado);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.pregunta {
+    background: #f2ebf7;
+    border-radius: 14px;
+    padding: 22px;
+    margin: 20px 0;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.opciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.opcion {
+    padding: 15px;
+    background: #f6f2fa;
+    border: 2px solid #e7dced;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.opcion:hover {
+    background: #e9dff1;
+    border-color: var(--morado);
+}
+
+.opcion:disabled {
+    cursor: not-allowed;
+    opacity: .75;
+}
+
+.correcta {
+    background: #d9f5e8 !important;
+    border-color: #299c69 !important;
+}
+
+.incorrecta {
+    background: #ffe0df !important;
+    border-color: #dc5d57 !important;
+}
+
+.mensaje {
+    display: none;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 18px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mensaje.visible {
+    display: block;
+}
+
+.barra {
+    height: 13px;
+    background: #e8e0ed;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progreso {
+    height: 100%;
+    width: 0%;
+    background: var(--turquesa);
+    transition: .3s;
+}
+
+.marcador {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-weight: bold;
+    color: var(--morado);
+}
+
+.resultado {
+    display: none;
+    text-align: center;
+    background: #e4f8f5;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.resultado.visible {
+    display: block;
+}
+
+.resultado h3 {
+    color: #147a73;
+    font-size: 25px;
+}
+
+.insignia {
+    display: inline-block;
+    margin: 15px;
+    padding: 18px;
+    border-radius: 50%;
+    background: var(--amarillo);
+    color: var(--oscuro);
+    font-size: 45px;
+    width: 100px;
+    height: 100px;
+}
+
+.panel-puntos {
+    background: var(--oscuro);
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 650px;
+    margin: auto;
+}
+
+.panel-puntos strong {
+    color: var(--amarillo);
+    font-size: 35px;
+}
+
+.reflexion {
+    background: var(--oscuro);
+    color: white;
+    text-align: center;
+    padding: 55px 20px;
+}
+
+.reflexion h2 {
+    margin-bottom: 15px;
+}
+
+.reflexion p {
+    max-width: 750px;
+    margin: auto;
+}
+
+footer {
+    background: #291638;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    font-size: 14px;
+}
+
+.enlace {
+    display: inline-block;
+    color: var(--amarillo);
+    text-decoration: none;
+    margin: 12px;
+    font-weight: bold;
+}
+
+@media(max-width: 650px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    section {
+        padding: 40px 6%;
+    }
+
+    .juego {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENCABEZADO -->
+<header>
+    <h2>💜 Rompiendo estereotipos</h2>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="aprendizajes.html">Aprende</a>
+        <a href="identifica.html">Identifica</a>
+        <a href="#juegos">Juega</a>
+        <a href="#puntos">Mis puntos</a>
+    </nav>
+</header>
+
+<!-- PORTADA -->
+<section class="hero">
+    <span class="etiqueta">MÓDULO 3 | JUEGA</span>
+
+    <h1>🎮 ¡Es hora de jugar!</h1>
+
+    <p>
+        Demuestra lo que sabes, supera los desafíos y rompe
+        los estereotipos de género. Cada respuesta correcta
+        te acerca a conseguir tu insignia.
+    </p>
+
+    <a href="#juegos" class="boton">Elegir un juego</a>
+</section>
+
+<!-- PRESENTACIÓN DE LOS JUEGOS -->
+<section id="juegos">
+
+    <h2 class="titulo">Selecciona tu desafío</h2>
+
+    <p class="subtitulo">
+        Completa los tres retos y acumula puntos.
+        ¡El conocimiento es tu mejor herramienta para transformar el mundo!
+    </p>
+
+    <div class="juegos">
+
+        <article class="tarjeta">
+            <div class="icono">⚖️</div>
+            <h3>Juego 1: Verdadero o falso</h3>
+            <p>
+                Analiza diferentes afirmaciones y decide
+                si son verdaderas o falsas.
+            </p>
+            <button class="boton" onclick="iniciarJuego(1)">
+                Jugar ahora
+            </button>
+        </article>
+
+        <article class="tarjeta">
+            <div class="icono">💥</div>
+            <h3>Juego 2: Rompe el estereotipo</h3>
+            <p>
+                Identifica la respuesta que permite
+                eliminar ideas que limitan a las personas.
+            </p>
+            <button class="boton" onclick="iniciarJuego(2)">
+                Jugar ahora
+            </button>
+        </article>
+
+        <article class="tarjeta">
+            <div class="icono">⏱️</div>
+            <h3>Juego 3: Reto relámpago</h3>
+            <p>
+                Responde cinco preguntas antes de que
+                termine el tiempo.
+            </p>
+            <button class="boton" onclick="iniciarJuego(3)">
+                Jugar ahora
+            </button>
+        </article>
+
+    </div>
+</section>
+
+<!-- ÁREA DEL JUEGO -->
+<section id="areaJuego">
+
+    <!-- JUEGO 1 -->
+    <div class="juego" id="juego1">
+
+        <h2>⚖️ Verdadero o falso</h2>
+
+        <div class="marcador">
+            <span id="progreso1">Pregunta 1 de 5</span>
+            <span>Puntos: <span id="puntos1">0</span></span>
+        </div>
+
+        <div class="barra">
+            <div class="progreso" id="barra1"></div>
+        </div>
+
+        <div class="pregunta" id="pregunta1"></div>
+
+        <div class="opciones">
+            <button class="opcion" onclick="responderVF(true)">
+                Verdadero
+            </button>
+
+            <button class="opcion" onclick="responderVF(false)">
+                Falso
+            </button>
+        </div>
+
+        <div class="mensaje" id="mensaje1"></div>
+
+        <div class="resultado" id="resultado1"></div>
+
+        <button class="boton" id="siguiente1"
+            style="display:none" onclick="siguientePregunta(1)">
+            Siguiente pregunta
+        </button>
+
+    </div>
+
+    <!-- JUEGO 2 -->
+    <div class="juego" id="juego2">
+
+        <h2>💥 Rompe el estereotipo</h2>
+
+        <div class="marcador">
+            <span id="progreso2">Reto 1 de 5</span>
+            <span>Puntos: <span id="puntos2">0</span></span>
+        </div>
+
+        <div class="barra">
+            <div class="progreso" id="barra2"></div>
+        </div>
+
+        <div class="pregunta" id="pregunta2"></div>
+
+        <div class="opciones" id="opciones2"></div>
+
+        <div class="mensaje" id="mensaje2"></div>
+
+        <div class="resultado" id="resultado2"></div>
+
+        <button class="boton" id="siguiente2"
+            style="display:none" onclick="siguientePregunta(2)">
+            Siguiente reto
+        </button>
+
+    </div>
+
+    <!-- JUEGO 3 -->
+    <div class="juego" id="juego3">
+
+        <h2>⏱️ Reto relámpago</h2>
+
+        <div class="marcador">
+            <span id="progreso3">Pregunta 1 de 5</span>
+            <span>Tiempo: <span id="tiempo">30</span> segundos</span>
+            <span>Puntos: <span id="puntos3">0</span></span>
+        </div>
+
+        <div class="barra">
+            <div class="progreso" id="barra3"></div>
+        </div>
+
+        <div class="pregunta" id="pregunta3"></div>
+
+        <div class="opciones" id="opciones3"></div>
+
+        <div class="mensaje" id="mensaje3"></div>
+
+        <div class="resultado" id="resultado3"></div>
+
+        <button class="boton" id="siguiente3"
+            style="display:none" onclick="siguientePregunta(3)">
+            Siguiente pregunta
+        </button>
+
+    </div>
+
+</section>
+
+<!-- MARCADOR GENERAL -->
+<section id="puntos">
+
+    <h2 class="titulo">🏆 Tu avance en el juego</h2>
+
+    <p class="subtitulo">
+        Cada desafío completado suma puntos a tu marcador general.
+    </p>
+
+    <div class="panel-puntos">
+
+        <p>Tu puntuación acumulada</p>
+
+        <strong id="totalPuntos">0</strong>
+
+        <p>puntos</p>
+
+        <div id="insigniaGeneral" style="margin-top:20px;">
+            🎯
+            <p>Completa los desafíos para conseguir tu insignia.</p>
+        </div>
+
+        <button class="boton" onclick="reiniciarTodo()">
+            Reiniciar todos los juegos
+        </button>
+
+    </div>
+
+</section>
+
+<!-- REFLEXIÓN -->
+<section class="reflexion">
+
+    <h2>¡El verdadero reto es transformar!</h2>
+
+    <p>
+        Los juegos nos ayudan a aprender, pero el cambio comienza
+        cuando ponemos en práctica lo aprendido.
+        Cuestiona las ideas que limitan, respeta las diferencias
+        y promueve la igualdad de oportunidades.
+    </p>
+
+    <br>
+
+    <p>
+        <strong>¡Tus capacidades no tienen género!</strong>
+    </p>
+	
+	<a href="puntuacion.html" class="boton">
+		Consultar mis puntos →
+	</a>
+
+    <a href="identifica.html" class="enlace">
+        ← Regresar a Identifica
+    </a>
+
+    <a href="index.html" class="enlace">
+        Ir al inicio →
+    </a>
+
+</section>
+
+<footer>
+    <p>Proyecto STEM: Rompiendo estereotipos</p>
+    <p>¡Tus capacidades no tienen género!</p>
+</footer>
+
+<script>
+
+// =====================================
+// CONFIGURACIÓN GENERAL
+// =====================================
+
+let totalPuntos = 0;
+
+let puntosJuego = {
+    1: 0,
+    2: 0,
+    3: 0
+};
+
+let preguntaActual = 0;
+let juegoActual = 0;
+let respuestasBloqueadas = false;
+let temporizador = null;
+let tiempoRestante = 30;
+
+const totalPreguntas = 5;
+
+// =====================================
+// JUEGO 1: VERDADERO O FALSO
+// =====================================
+
+const preguntasVF = [
+    {
+        pregunta: "Los hombres y las mujeres pueden desarrollar habilidades para la programación.",
+        respuesta: true,
+        explicacion: "Correcto. Las habilidades se desarrollan mediante el aprendizaje y la práctica, no están determinadas por el género."
+    },
+    {
+        pregunta: "Las tareas domésticas son responsabilidad exclusiva de las mujeres.",
+        respuesta: false,
+        explicacion: "Las tareas domésticas pueden compartirse entre todas las personas que integran una familia."
+    },
+    {
+        pregunta: "Un hombre puede dedicarse profesionalmente a la enfermería.",
+        respuesta: true,
+        explicacion: "Todas las personas pueden elegir su profesión de acuerdo con sus intereses y capacidades."
+    },
+    {
+        pregunta: "Los estereotipos de género pueden limitar las oportunidades de las personas.",
+        respuesta: true,
+        explicacion: "Los estereotipos pueden generar prejuicios y limitar la participación de las personas."
+    },
+    {
+        pregunta: "La igualdad significa que todas las personas deben tener los mismos gustos e intereses.",
+        respuesta: false,
+        explicacion: "La igualdad significa contar con los mismos derechos y oportunidades, respetando las diferencias individuales."
+    }
+];
+
+// =====================================
+// JUEGO 2: ROMPE EL ESTEREOTIPO
+// =====================================
+
+const preguntasRompe = [
+    {
+        pregunta: "Se afirma que las mujeres no pueden ser ingenieras.",
+        opciones: [
+            "Las ingenierías son para hombres.",
+            "Las mujeres pueden desarrollar habilidades de ingeniería.",
+            "Las mujeres deben elegir otra profesión."
+        ],
+        correcta: 1,
+        explicacion: "Las capacidades profesionales no dependen del género."
+    },
+    {
+        pregunta: "Un compañero se burla de otro porque quiere estudiar danza.",
+        opciones: [
+            "La danza puede ser una actividad profesional para cualquier persona.",
+            "La danza es exclusivamente para mujeres.",
+            "Debe elegir una actividad diferente."
+        ],
+        correcta: 0,
+        explicacion: "Las personas tienen derecho a elegir sus actividades sin temor a burlas."
+    },
+    {
+        pregunta: "En un equipo escolar, solamente los hombres quieren programar.",
+        opciones: [
+            "Las mujeres deben encargarse de decorar.",
+            "Todas las personas pueden participar en programación.",
+            "Las mujeres no deben utilizar computadoras."
+        ],
+        correcta: 1,
+        explicacion: "La programación es una disciplina abierta a todas las personas."
+    },
+    {
+        pregunta: "Se piensa que los hombres no deben expresar sus emociones.",
+        opciones: [
+            "Los hombres no deben llorar.",
+            "Las emociones son exclusivas de las mujeres.",
+            "Todas las personas tienen derecho a expresar sus emociones."
+        ],
+        correcta: 2,
+        explicacion: "Expresar emociones es parte del bienestar humano, sin importar el género."
+    },
+    {
+        pregunta: "Una empresa considera que solamente los hombres pueden dirigir equipos.",
+        opciones: [
+            "El liderazgo depende de las habilidades y preparación.",
+            "Las mujeres no pueden ser líderes.",
+            "Los puestos directivos son exclusivos de los hombres."
+        ],
+        correcta: 0,
+        explicacion: "El liderazgo se relaciona con competencias, experiencia y preparación, no con el género."
+    }
+];
+
+// =====================================
+// JUEGO 3: RETO RELÁMPAGO
+// =====================================
+
+const preguntasRapidas = [
+    {
+        pregunta: "¿Qué es un estereotipo de género?",
+        opciones: [
+            "Una idea generalizada sobre hombres y mujeres.",
+            "Una ley que protege a las personas.",
+            "Una habilidad profesional."
+        ],
+        correcta: 0,
+        explicacion: "Es una idea generalizada que atribuye características o roles a las personas por su género."
+    },
+    {
+        pregunta: "¿Qué significa igualdad de oportunidades?",
+        opciones: [
+            "Que todos deben pensar igual.",
+            "Que todas las personas puedan acceder a las mismas oportunidades.",
+            "Que unas personas tengan más derechos."
+        ],
+        correcta: 1,
+        explicacion: "La igualdad de oportunidades busca que todas las personas puedan desarrollarse sin discriminación."
+    },
+    {
+        pregunta: "¿Cuál es un ejemplo de discriminación?",
+        opciones: [
+            "Compartir responsabilidades.",
+            "Respetar las decisiones personales.",
+            "Negar un empleo por razón de género."
+        ],
+        correcta: 2,
+        explicacion: "Negar una oportunidad por razón de género constituye un trato discriminatorio."
+    },
+    {
+        pregunta: "¿Qué acción ayuda a romper estereotipos?",
+        opciones: [
+            "Cuestionar ideas que limitan a las personas.",
+            "Repetir comentarios discriminatorios.",
+            "Impedir que las personas elijan su profesión."
+        ],
+        correcta: 0,
+        explicacion: "Cuestionar los estereotipos ayuda a construir relaciones más igualitarias."
+    },
+    {
+        pregunta: "¿Quién puede estudiar informática?",
+        opciones: [
+            "Solamente los hombres.",
+            "Solamente las mujeres.",
+            "Cualquier persona interesada en aprender."
+        ],
+        correcta: 2,
+        explicacion: "La informática es una disciplina para todas las personas."
+    }
+];
+
+// =====================================
+// INICIAR JUEGOS
+// =====================================
+
+function iniciarJuego(numero) {
+
+    detenerTemporizador();
+
+    document.querySelectorAll(".juego").forEach(juego => {
+        juego.classList.remove("activo");
+    });
+
+    juegoActual = numero;
+    preguntaActual = 0;
+    respuestasBloqueadas = false;
+
+    puntosJuego[numero] = 0;
+
+    document.getElementById("puntos" + numero).textContent = 0;
+
+    document.getElementById("resultado" + numero).classList.remove("visible");
+
+    document.getElementById("siguiente" + numero).style.display = "none";
+
+    document.getElementById("juego" + numero).classList.add("activo");
+
+    document.getElementById("juego" + numero).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+    if (numero === 1) {
+        mostrarPreguntaVF();
+    }
+
+    if (numero === 2) {
+        mostrarPreguntaRompe();
+    }
+
+    if (numero === 3) {
+        tiempoRestante = 30;
+        document.getElementById("tiempo").textContent = tiempoRestante;
+        mostrarPreguntaRapida();
+        iniciarTemporizador();
+    }
+}
+
+// =====================================
+// JUEGO 1: MOSTRAR Y RESPONDER
+// =====================================
+
+function mostrarPreguntaVF() {
+
+    respuestasBloqueadas = false;
+
+    const pregunta = preguntasVF[preguntaActual];
+
+    document.getElementById("pregunta1").textContent = pregunta.pregunta;
+
+    document.getElementById("progreso1").textContent =
+        "Pregunta " + (preguntaActual + 1) + " de 5";
+
+    document.getElementById("barra1").style.width =
+        (preguntaActual / 5 * 100) + "%";
+
+    document.getElementById("mensaje1").classList.remove("visible");
+
+    document.querySelectorAll("#juego1 .opcion").forEach(boton => {
+        boton.disabled = false;
+        boton.classList.remove("correcta", "incorrecta");
+    });
+
+    document.getElementById("siguiente1").style.display = "none";
+}
+
+function responderVF(respuesta) {
+
+    if (respuestasBloqueadas) return;
+
+    respuestasBloqueadas = true;
+
+    const pregunta = preguntasVF[preguntaActual];
+
+    const botones = document.querySelectorAll("#juego1 .opcion");
+
+    const esCorrecta = respuesta === pregunta.respuesta;
+
+    if (esCorrecta) {
+        puntosJuego[1] += 20;
+    }
+
+    botones.forEach((boton, indice) => {
+
+        boton.disabled = true;
+
+        const valor = indice === 0;
+
+        if (valor === pregunta.respuesta) {
+            boton.classList.add("correcta");
+        }
+
+        if (valor === respuesta && !esCorrecta) {
+            boton.classList.add("incorrecta");
+        }
+    });
+
+    document.getElementById("puntos1").textContent = puntosJuego[1];
+
+    mostrarMensaje(1, esCorrecta, pregunta.explicacion);
+
+    actualizarBarra(1);
+
+    document.getElementById("siguiente1").style.display = "inline-block";
+}
+
+// =====================================
+// JUEGO 2: MOSTRAR Y RESPONDER
+// =====================================
+
+function mostrarPreguntaRompe() {
+
+    respuestasBloqueadas = false;
+
+    const pregunta = preguntasRompe[preguntaActual];
+
+    document.getElementById("pregunta2").textContent = pregunta.pregunta;
+
+    document.getElementById("progreso2").textContent =
+        "Reto " + (preguntaActual + 1) + " de 5";
+
+    document.getElementById("barra2").style.width =
+        (preguntaActual / 5 * 100) + "%";
+
+    document.getElementById("mensaje2").classList.remove("visible");
+
+    document.getElementById("siguiente2").style.display = "none";
+
+    const contenedor = document.getElementById("opciones2");
+
+    contenedor.innerHTML = "";
+
+    pregunta.opciones.forEach((opcion, indice) => {
+
+        const boton = document.createElement("button");
+
+        boton.className = "opcion";
+
+        boton.textContent = opcion;
+
+        boton.onclick = () => responderRompe(indice);
+
+        contenedor.appendChild(boton);
+    });
+}
+
+function responderRompe(respuesta) {
+
+    if (respuestasBloqueadas) return;
+
+    respuestasBloqueadas = true;
+
+    const pregunta = preguntasRompe[preguntaActual];
+
+    const esCorrecta = respuesta === pregunta.correcta;
+
+    if (esCorrecta) {
+        puntosJuego[2] += 20;
+    }
+
+    const botones = document.querySelectorAll("#opciones2 .opcion");
+
+    botones.forEach((boton, indice) => {
+
+        boton.disabled = true;
+
+        if (indice === pregunta.correcta) {
+            boton.classList.add("correcta");
+        }
+
+        if (indice === respuesta && !esCorrecta) {
+            boton.classList.add("incorrecta");
+        }
+    });
+
+    document.getElementById("puntos2").textContent = puntosJuego[2];
+
+    mostrarMensaje(2, esCorrecta, pregunta.explicacion);
+
+    actualizarBarra(2);
+
+    document.getElementById("siguiente2").style.display = "inline-block";
+}
+
+// =====================================
+// JUEGO 3: RETO RELÁMPAGO
+// =====================================
+
+function mostrarPreguntaRapida() {
+
+    respuestasBloqueadas = false;
+
+    const pregunta = preguntasRapidas[preguntaActual];
+
+    document.getElementById("pregunta3").textContent = pregunta.pregunta;
+
+    document.getElementById("progreso3").textContent =
+        "Pregunta " + (preguntaActual + 1) + " de 5";
+
+    document.getElementById("barra3").style.width =
+        (preguntaActual / 5 * 100) + "%";
+
+    document.getElementById("mensaje3").classList.remove("visible");
+
+    document.getElementById("siguiente3").style.display = "none";
+
+    const contenedor = document.getElementById("opciones3");
+
+    contenedor.innerHTML = "";
+
+    pregunta.opciones.forEach((opcion, indice) => {
+
+        const boton = document.createElement("button");
+
+        boton.className = "opcion";
+
+        boton.textContent = opcion;
+
+        boton.onclick = () => responderRapida(indice);
+
+        contenedor.appendChild(boton);
+    });
+}
+
+function responderRapida(respuesta) {
+
+    if (respuestasBloqueadas) return;
+
+    respuestasBloqueadas = true;
+
+    const pregunta = preguntasRapidas[preguntaActual];
+
+    const esCorrecta = respuesta === pregunta.correcta;
+
+    if (esCorrecta) {
+        puntosJuego[3] += 20;
+    }
+
+    const botones = document.querySelectorAll("#opciones3 .opcion");
+
+    botones.forEach((boton, indice) => {
+
+        boton.disabled = true;
+
+        if (indice === pregunta.correcta) {
+            boton.classList.add("correcta");
+        }
+
+        if (indice === respuesta && !esCorrecta) {
+            boton.classList.add("incorrecta");
+        }
+    });
+
+    document.getElementById("puntos3").textContent = puntosJuego[3];
+
+    mostrarMensaje(3, esCorrecta, pregunta.explicacion);
+
+    actualizarBarra(3);
+
+    document.getElementById("siguiente3").style.display = "inline-block";
+}
+
+// =====================================
+// MENSAJES Y RETROALIMENTACIÓN
+// =====================================
+
+function mostrarMensaje(numero, correcta, explicacion) {
+
+    const mensaje = document.getElementById("mensaje" + numero);
+
+    mensaje.classList.add("visible");
+
+    if (correcta) {
+
+        mensaje.style.background = "#d9f5e8";
+
+        mensaje.style.color = "#147a50";
+
+        mensaje.innerHTML =
+            "¡Respuesta correcta! 🎉<br>" + explicacion;
+
+    } else {
+
+        mensaje.style.background = "#ffe8e6";
+
+        mensaje.style.color = "#a53e39";
+
+        mensaje.innerHTML =
+            "¡Sigue aprendiendo! 💡<br>" + explicacion;
+    }
+}
+
+// =====================================
+// SIGUIENTE PREGUNTA
+// =====================================
+
+function siguientePregunta(numero) {
+
+    preguntaActual++;
+
+    if (preguntaActual >= totalPreguntas) {
+
+        finalizarJuego(numero);
+
+        return;
+    }
+
+    if (numero === 1) mostrarPreguntaVF();
+
+    if (numero === 2) mostrarPreguntaRompe();
+
+    if (numero === 3) mostrarPreguntaRapida();
+}
+
+// =====================================
+// BARRA DE PROGRESO
+// =====================================
+
+function actualizarBarra(numero) {
+
+    document.getElementById("barra" + numero).style.width =
+        ((preguntaActual + 1) / 5 * 100) + "%";
+}
+
+// =====================================
+// TEMPORIZADOR
+// =====================================
+
+function iniciarTemporizador() {
+
+    detenerTemporizador();
+
+    temporizador = setInterval(() => {
+
+        tiempoRestante--;
+
+        document.getElementById("tiempo").textContent = tiempoRestante;
+
+        if (tiempoRestante <= 0) {
+
+            detenerTemporizador();
+
+            finalizarJuego(3, true);
+        }
+
+    }, 1000);
+}
+
+function detenerTemporizador() {
+
+    if (temporizador !== null) {
+
+        clearInterval(temporizador);
+
+        temporizador = null;
+    }
+}
+
+// =====================================
+// FINALIZAR JUEGO
+// =====================================
+
+function finalizarJuego(numero, tiempoAgotado = false) {
+
+    if (numero === 3) {
+        detenerTemporizador();
+    }
+
+    const resultado = document.getElementById("resultado" + numero);
+
+    resultado.classList.add("visible");
+
+    document.getElementById("siguiente" + numero).style.display = "none";
+
+    let mensaje = "";
+
+    if (tiempoAgotado) {
+
+        mensaje = "<p>⏰ ¡Se terminó el tiempo!</p>";
+
+    } else {
+
+        mensaje = "<p>¡Has completado el desafío!</p>";
+    }
+
+    mensaje +=
+        "<h3>" + puntosJuego[numero] + " / 100 puntos</h3>";
+
+    mensaje +=
+        "<p>" + obtenerMensaje(puntosJuego[numero]) + "</p>";
+
+    resultado.innerHTML = mensaje;
+
+    if (preguntaActual === 4) {
+        document.getElementById("barra" + numero).style.width = "100%";
+    }
+
+    actualizarTotal();
+}
+
+// =====================================
+// MENSAJE SEGÚN RESULTADO
+// =====================================
+
+function obtenerMensaje(puntos) {
+
+    if (puntos === 100) {
+        return "¡Perfecto! Eres un defensor de la igualdad. 🏆";
+    }
+
+    if (puntos >= 60) {
+        return "¡Muy bien! Continúa cuestionando los estereotipos. 🌟";
+    }
+
+    return "¡No te rindas! Aprender también significa intentarlo de nuevo. 💜";
+}
+
+// =====================================
+// ACTUALIZAR PUNTUACIÓN GENERAL
+// =====================================
+
+/*function actualizarTotal() {
+
+    totalPuntos =
+        puntosJuego[1] +
+        puntosJuego[2] +
+        puntosJuego[3];
+
+    document.getElementById("totalPuntos").textContent = totalPuntos;
+	
+	localStorage.setItem(
+    "rompiendoEstereotiposPuntos",
+    JSON.stringify({
+        total: totalPuntos
+    })
+	);
+
+    const insignia = document.getElementById("insigniaGeneral");
+
+    if (totalPuntos === 300) {
+
+        insignia.innerHTML =
+            '<div class="insignia">🏆</div>' +
+            '<h3>Insignia: Agente del cambio</h3>' +
+            '<p>¡Completaste todos los desafíos con la máxima puntuación!</p>';
+
+    } else if (totalPuntos >= 200) {
+
+        insignia.innerHTML =
+            '<div class="insignia">🥇</div>' +
+            '<h3>Insignia: Defensor de la igualdad</h3>' +
+            '<p>¡Excelente avance! Estás cerca de completar todos los retos.</p>';
+
+    } else if (totalPuntos >= 100) {
+
+        insignia.innerHTML =
+            '<div class="insignia">⭐</div>' +
+            '<h3>Insignia: Rompeestereotipos</h3>' +
+            '<p>¡Has demostrado que sabes identificar situaciones de desigualdad!</p>';
+
+    } else {
+
+        insignia.innerHTML =
+            '<div class="insignia">🎯</div>' +
+            '<p>Completa más desafíos para conseguir tu insignia.</p>';
+    }
+}*/
+
+
+function actualizarTotal() {
+
+    // SUMAR LOS PUNTOS DE LOS TRES JUEGOS
+    totalPuntos =
+        puntosJuego[1] +
+        puntosJuego[2] +
+        puntosJuego[3];
+
+    // MOSTRAR LOS PUNTOS GENERALES
+    document.getElementById("totalPuntos").textContent = totalPuntos;
+
+    // GUARDAR LOS PUNTOS EN EL NAVEGADOR
+    localStorage.setItem(
+        "rompiendoEstereotiposPuntos",
+        JSON.stringify({
+            total: totalPuntos
+        })
+    );
+
+    const insignia = document.getElementById("insigniaGeneral");
+
+    if (totalPuntos === 300) {
+
+        insignia.innerHTML =
+            '<div class="insignia">🏆</div>' +
+            '<h3>Insignia: Agente del cambio</h3>' +
+            '<p>¡Completaste todos los desafíos con la máxima puntuación!</p>';
+
+    } else if (totalPuntos >= 200) {
+
+        insignia.innerHTML =
+            '<div class="insignia">🥇</div>' +
+            '<h3>Insignia: Defensor de la igualdad</h3>' +
+            '<p>¡Excelente avance! Estás cerca de completar todos los retos.</p>';
+
+    } else if (totalPuntos >= 100) {
+
+        insignia.innerHTML =
+            '<div class="insignia">⭐</div>' +
+            '<h3>Insignia: Rompeestereotipos</h3>' +
+            '<p>¡Has demostrado que sabes identificar situaciones de desigualdad!</p>';
+
+    } else {
+
+        insignia.innerHTML =
+            '<div class="insignia">🎯</div>' +
+            '<p>Completa más desafíos para conseguir tu insignia.</p>';
+    }
+}
+
+
+// =====================================
+// REINICIAR TODOS LOS JUEGOS
+// =====================================
+
+function reiniciarTodo() {
+
+    detenerTemporizador();
+
+    puntosJuego = {
+        1: 0,
+        2: 0,
+        3: 0
+    };
+
+    totalPuntos = 0;
+
+    preguntaActual = 0;
+
+    juegoActual = 0;
+
+    respuestasBloqueadas = false;
+
+    document.getElementById("totalPuntos").textContent = "0";
+
+    document.getElementById("insigniaGeneral").innerHTML =
+        "🎯<p>Completa los desafíos para conseguir tu insignia.</p>";
+
+    document.querySelectorAll(".juego").forEach(juego => {
+        juego.classList.remove("activo");
+    });
+
+    document.querySelectorAll(".resultado").forEach(resultado => {
+        resultado.classList.remove("visible");
+    });
+
+    [1, 2, 3].forEach(numero => {
+
+        document.getElementById("puntos" + numero).textContent = "0";
+
+        document.getElementById("barra" + numero).style.width = "0%";
+
+        document.getElementById("siguiente" + numero).style.display = "none";
+
+        document.getElementById("mensaje" + numero).classList.remove("visible");
+    });
+
+    document.getElementById("tiempo").textContent = "30";
+
+    document.getElementById("juegos").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>

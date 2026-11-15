@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Misiones | Rompiendo estereotipos</title>
+
+<style>
+:root {
+    --morado: #673ab7;
+    --morado-oscuro: #4527a0;
+    --turquesa: #20b8b0;
+    --amarillo: #ffd54f;
+    --coral: #ff796c;
+    --fondo: #f7f5fc;
+    --texto: #302b3d;
+    --blanco: #ffffff;
+    --verde: #2e9d68;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--blanco);
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    color: var(--morado);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: var(--turquesa);
+}
+
+.hero {
+    background: linear-gradient(135deg, var(--morado), #9575cd);
+    color: white;
+    text-align: center;
+    padding: 65px 20px;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: var(--amarillo);
+    color: #493600;
+    padding: 7px 17px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin-bottom: 12px;
+}
+
+.hero p {
+    max-width: 720px;
+    margin: auto;
+    font-size: 18px;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 1050px;
+    margin: 45px auto;
+}
+
+h2 {
+    color: var(--morado);
+    margin-bottom: 15px;
+    font-size: 27px;
+}
+
+.introduccion {
+    background: white;
+    border-left: 6px solid var(--turquesa);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+.instrucciones {
+    background: #fff5d6;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 30px;
+}
+
+.panel-progreso {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+.datos-progreso {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.barra {
+    width: 100%;
+    height: 15px;
+    background: #e9e3f2;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progreso {
+    height: 100%;
+    width: 0%;
+    background: var(--turquesa);
+    transition: width .4s;
+}
+
+.mision {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.06);
+    border-top: 5px solid var(--turquesa);
+}
+
+.mision.completada {
+    border-top-color: var(--verde);
+    background: #fbfffc;
+}
+
+.numero {
+    display: inline-block;
+    background: var(--morado);
+    color: white;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.mision h3 {
+    color: var(--morado-oscuro);
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.categoria {
+    color: var(--turquesa);
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.descripcion {
+    background: #f4f1fa;
+    padding: 17px;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.reto {
+    margin: 15px 0;
+}
+
+.reto ul {
+    padding-left: 22px;
+}
+
+.reto li {
+    margin-bottom: 7px;
+}
+
+.puntos {
+    display: inline-block;
+    background: #fff2c7;
+    color: #705400;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.completar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    padding: 14px;
+    border: 2px solid #e3ddec;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.completar input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--turquesa);
+    cursor: pointer;
+}
+
+.completar:hover {
+    border-color: var(--turquesa);
+}
+
+.reconocimientos {
+    background: white;
+    padding: 28px;
+    border-radius: 15px;
+    margin: 35px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+.medallas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.medalla {
+    padding: 18px;
+    border: 2px solid #e5deef;
+    border-radius: 12px;
+    text-align: center;
+    background: #faf9fc;
+    opacity: .55;
+}
+
+.medalla.obtenida {
+    opacity: 1;
+    border-color: var(--amarillo);
+    background: #fff9e5;
+}
+
+.medalla .emoji {
+    font-size: 35px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.medalla strong {
+    display: block;
+    color: var(--morado);
+}
+
+.compromiso {
+    background: linear-gradient(135deg, #d9f5f1, #fff1d1);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 40px 0;
+}
+
+textarea {
+    width: 100%;
+    min-height: 110px;
+    border: 2px solid #d8d0e5;
+    border-radius: 10px;
+    padding: 13px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    resize: vertical;
+    margin-top: 12px;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--turquesa);
+}
+
+.boton {
+    display: inline-block;
+    border: none;
+    background: var(--morado);
+    color: white;
+    padding: 13px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 8px 5px;
+    font-size: 15px;
+}
+
+.boton:hover {
+    background: var(--morado-oscuro);
+}
+
+.boton-secundario {
+    background: var(--turquesa);
+}
+
+.boton-secundario:hover {
+    background: #138b85;
+}
+
+.mensaje {
+    margin-top: 12px;
+    font-weight: bold;
+    color: var(--verde);
+}
+
+footer {
+    background: #302344;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 50px;
+}
+
+@media (max-width: 700px) {
+    header {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .contenedor {
+        width: 92%;
+    }
+
+    .mision {
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">💜 Rompiendo estereotipos</div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="aprendizajes.html">Aprende</a>
+        <a href="identifica.html">Identifica</a>
+        <a href="juego.html">Juega</a>
+        <a href="profesiones.html">Profesiones</a>
+        <a href="situaciones.html">Situaciones</a>
+        <a href="#misiones">Misiones</a>
+        <a href="evaluacion.html">Evaluación</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <span class="etiqueta">MÓDULO 6 | MISIONES</span>
+    <h1>¡Conviértete en agente del cambio!</h1>
+    <p>
+        Los grandes cambios comienzan con pequeñas acciones.
+        Acepta los retos, participa y demuestra que puedes contribuir
+        a construir una sociedad más igualitaria.
+    </p>
+</section>
+
+<main class="contenedor">
+
+    <section class="introduccion">
+        <h2>🎯 Tu misión comienza aquí</h2>
+        <p>
+            Ya aprendiste a reconocer los estereotipos, identificar
+            situaciones de desigualdad y cuestionar ideas que limitan
+            las capacidades de las personas.
+        </p>
+        <br>
+        <p>
+            Ahora es momento de actuar. Completa las misiones propuestas
+            y reflexiona sobre cómo puedes promover la igualdad de
+            género en tu entorno.
+        </p>
+    </section>
+
+    <section class="instrucciones">
+        <h3>📌 Instrucciones generales</h3>
+        <ol style="padding-left:22px; margin-top:10px;">
+            <li>Lee cada misión y comprende el reto.</li>
+            <li>Realiza las actividades propuestas.</li>
+            <li>Cuando hayas terminado una misión, marca la casilla correspondiente.</li>
+            <li>Consulta tu progreso y los reconocimientos obtenidos.</li>
+            <li>Escribe tu compromiso personal al finalizar.</li>
+        </ol>
+        <p style="margin-top:12px;">
+            <strong>Importante:</strong> Algunas misiones requieren
+            evidencias en tu cuaderno, fotografías, entrevistas o
+            productos digitales. La casilla de completado es una
+            declaración personal de que realizaste el reto.
+        </p>
+    </section>
+
+    <section class="panel-progreso">
+        <h2>🏆 Mi tablero de misiones</h2>
+
+        <div class="datos-progreso">
+            <span id="contador">Misiones completadas: 0 de 5</span>
+            <span id="totalPuntos">Puntos: 0 / 500</span>
+        </div>
+
+        <div class="barra">
+            <div class="progreso" id="barraProgreso"></div>
+        </div>
+
+        <p id="estado" style="margin-top:12px;">
+            ¡Comienza tu primera misión!
+        </p>
+    </section>
+
+    <section id="misiones">
+
+        <h2>🚀 Tus cinco misiones</h2>
+
+        <!-- MISIÓN 1 -->
+        <article class="mision" id="mision1">
+            <span class="numero">MISIÓN 1</span>
+            <p class="categoria">🔎 OBSERVACIÓN | ENTORNO FAMILIAR</p>
+            <h3>Detectives de estereotipos</h3>
+
+            <div class="descripcion">
+                <p>
+                    Durante un día, observa cómo se distribuyen las
+                    actividades y responsabilidades en tu entorno
+                    familiar. Identifica si existen tareas asignadas
+                    únicamente a hombres o mujeres.
+                </p>
+            </div>
+
+            <div class="reto">
+                <strong>Tu reto:</strong>
+                <ul>
+                    <li>Identifica al menos tres actividades del hogar.</li>
+                    <li>Observa quién realiza cada actividad.</li>
+                    <li>Reflexiona si existe una distribución equitativa.</li>
+                    <li>Propón una forma de distribuir las responsabilidades.</li>
+                </ul>
+            </div>
+
+            <p><strong>Evidencia:</strong> Tabla de observación y reflexión de cinco líneas en tu cuaderno.</p>
+
+            <span class="puntos">�?100 puntos</span>
+
+            <label class="completar">
+                <input type="checkbox" id="check1" onchange="actualizarMisiones()">
+                He completado esta misión.
+            </label>
+        </article>
+
+        <!-- MISIÓN 2 -->
+        <article class="mision" id="mision2">
+            <span class="numero">MISIÓN 2</span>
+            <p class="categoria">🎤 INVESTIGACIÓN | HISTORIAS QUE INSPIRAN</p>
+            <h3>Voces que rompen barreras</h3>
+
+            <div class="descripcion">
+                <p>
+                    Investiga a una persona que haya destacado en una
+                    actividad profesional o científica que tradicionalmente
+                    se relaciona con un género determinado.
+                </p>
+            </div>
+
+            <div class="reto">
+                <strong>Tu reto:</strong>
+                <ul>
+                    <li>Selecciona una persona científica, tecnológica, artística o deportiva.</li>
+                    <li>Investiga su historia y sus principales logros.</li>
+                    <li>Identifica qué barreras o estereotipos enfrentó, si los hubo.</li>
+                    <li>Explica por qué su historia puede inspirar a otras personas.</li>
+                </ul>
+            </div>
+
+            <p><strong>Evidencia:</strong> Ficha biográfica, infografía o presentación de una página.</p>
+
+            <span class="puntos">�?100 puntos</span>
+
+            <label class="completar">
+                <input type="checkbox" id="check2" onchange="actualizarMisiones()">
+                He completado esta misión.
+            </label>
+        </article>
+
+        <!-- MISIÓN 3 -->
+        <article class="mision" id="mision3">
+            <span class="numero">MISIÓN 3</span>
+            <p class="categoria">💻 CREATIVIDAD | TECNOLOGÍA</p>
+            <h3>Una imagen vale más que mil palabras</h3>
+
+            <div class="descripcion">
+                <p>
+                    Diseña un cartel digital que promueva la igualdad
+                    de género en las áreas de ciencia, tecnología,
+                    ingeniería y matemáticas (STEM).
+                </p>
+            </div>
+
+            <div class="reto">
+                <strong>Tu reto:</strong>
+                <ul>
+                    <li>Elabora un diseño en Canva, PowerPoint u otra herramienta.</li>
+                    <li>Incluye una frase que invite a romper estereotipos.</li>
+                    <li>Representa a personas con distintas capacidades e intereses.</li>
+                    <li>Evita utilizar imágenes o mensajes que reproduzcan prejuicios.</li>
+                </ul>
+            </div>
+
+            <p><strong>Evidencia:</strong> Cartel digital con el lema «¡Tus capacidades no tienen género!».</p>
+
+            <span class="puntos">�?100 puntos</span>
+
+            <label class="completar">
+                <input type="checkbox" id="check3" onchange="actualizarMisiones()">
+                He completado esta misión.
+            </label>
+        </article>
+
+        <!-- MISIÓN 4 -->
+        <article class="mision" id="mision4">
+            <span class="numero">MISIÓN 4</span>
+            <p class="categoria">🤝 PARTICIPACIÓN | COMUNIDAD ESCOLAR</p>
+            <h3>Una escuela para todas las personas</h3>
+
+            <div class="descripcion">
+                <p>
+                    Analiza tu escuela e identifica una situación en la
+                    que se pueda mejorar la igualdad de oportunidades
+                    y la participación de estudiantes.
+                </p>
+            </div>
+
+            <div class="reto">
+                <strong>Tu reto:</strong>
+                <ul>
+                    <li>Identifica una situación que pueda mejorarse.</li>
+                    <li>Explica por qué representa un área de oportunidad.</li>
+                    <li>Propón una acción concreta para mejorarla.</li>
+                    <li>Comparte tu propuesta con tu grupo o docente.</li>
+                </ul>
+            </div>
+
+            <p><strong>Evidencia:</strong> Propuesta escrita con problema, solución y beneficio esperado.</p>
+
+            <span class="puntos">�?100 puntos</span>
+
+            <label class="completar">
+                <input type="checkbox" id="check4" onchange="actualizarMisiones()">
+                He completado esta misión.
+            </label>
+        </article>
+
+        <!-- MISIÓN 5 -->
+        <article class="mision" id="mision5">
+            <span class="numero">MISIÓN 5</span>
+            <p class="categoria">🌎 COMPROMISO | AGENTES DEL CAMBIO</p>
+            <h3>El cambio comienza conmigo</h3>
+
+            <div class="descripcion">
+                <p>
+                    Es momento de asumir un compromiso personal para
+                    contribuir a una convivencia basada en el respeto,
+                    la igualdad y la inclusión.
+                </p>
+            </div>
+
+            <div class="reto">
+                <strong>Tu reto:</strong>
+                <ul>
+                    <li>Identifica una conducta que deseas cambiar o mejorar.</li>
+                    <li>Escribe tres acciones que puedas realizar.</li>
+                    <li>Comparte tu compromiso con una persona o con tu grupo.</li>
+                    <li>Reflexiona sobre cómo tus acciones pueden influir en los demás.</li>
+                </ul>
+            </div>
+
+            <p><strong>Evidencia:</strong> Compromiso personal firmado y reflexión final.</p>
+
+            <span class="puntos">�?100 puntos</span>
+
+            <label class="completar">
+                <input type="checkbox" id="check5" onchange="actualizarMisiones()">
+                He completado esta misión.
+            </label>
+        </article>
+
+    </section>
+
+    <section class="reconocimientos">
+        <h2>🏅 Mis reconocimientos</h2>
+        <p>
+            Cada misión completada te acerca a obtener un reconocimiento.
+            ¡Sigue avanzando!
+        </p>
+
+        <div class="medallas">
+
+            <div class="medalla" id="medalla1">
+                <span class="emoji">🔍</span>
+                <strong>Observador consciente</strong>
+                <small>Completa 1 misión.</small>
+            </div>
+
+            <div class="medalla" id="medalla2">
+                <span class="emoji">💡</span>
+                <strong>Rompeestereotipos</strong>
+                <small>Completa 2 misiones.</small>
+            </div>
+
+            <div class="medalla" id="medalla3">
+                <span class="emoji">🎨</span>
+                <strong>Creatividad inclusiva</strong>
+                <small>Completa 3 misiones.</small>
+            </div>
+
+            <div class="medalla" id="medalla4">
+                <span class="emoji">🤝</span>
+                <strong>Promotor de igualdad</strong>
+                <small>Completa 4 misiones.</small>
+            </div>
+
+            <div class="medalla" id="medalla5">
+                <span class="emoji">🌟</span>
+                <strong>Agente del cambio</strong>
+                <small>Completa las 5 misiones.</small>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="compromiso">
+        <h2>💜 Mi compromiso personal</h2>
+
+        <p>
+            Completa la siguiente frase con una acción concreta
+            que te comprometas a realizar:
+        </p>
+
+        <p style="margin-top:15px;">
+            <strong>
+                «A partir de hoy, contribuiré a la igualdad de género cuando…�?
+            </strong>
+        </p>
+
+        <textarea
+            id="textoCompromiso"
+            placeholder="Escribe aquí tu compromiso personal..."
+        ></textarea>
+
+        <button class="boton" onclick="guardarCompromiso()">
+            Guardar mi compromiso
+        </button>
+
+        <p class="mensaje" id="mensajeCompromiso"></p>
+    </section>
+
+    <section class="introduccion" style="text-align:center;">
+        <h2>🎉 ¡Gracias por participar!</h2>
+        <p>
+            Recuerda que no necesitas realizar grandes acciones para
+            generar un cambio. Escuchar, respetar, compartir oportunidades
+            y cuestionar los prejuicios son pasos importantes para
+            construir una sociedad más justa.
+        </p>
+        <br>
+        <strong>¡Tus capacidades no tienen género!</strong>
+    </section>
+
+    <div style="text-align:center; margin:35px 0;">
+        <a href="situaciones.html" class="boton">
+            �?Situaciones
+        </a>
+
+        <a href="evaluacion.html" class="boton boton-secundario">
+            Continuar a Evaluación �?
+        </a>
+		
+		<a href="puntuacion.html" class="boton">
+			Consultar mis puntos ��
+		</a>
+	
+        <a href="index.html" class="boton">
+            Volver al inicio
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    <p><strong>ROMPIENDO ESTEREOTIPOS</strong></p>
+    <p>¡Tus capacidades no tienen género!</p>
+    <p>Proyecto STEM | Ciencia, Tecnología, Ingeniería y Matemáticas</p>
+</footer>
+
+<script>
+
+// Clave para guardar el avance en este navegador
+const CLAVE = "rompiendoEstereotiposMisiones";
+
+// Recuperar información guardada
+let datos = {
+    misiones: [false, false, false, false, false],
+    compromiso: ""
+};
+
+function cargarDatos() {
+
+    const guardado = localStorage.getItem(CLAVE);
+
+    if (guardado) {
+        try {
+            const recuperado = JSON.parse(guardado);
+
+            if (
+                recuperado &&
+                Array.isArray(recuperado.misiones) &&
+                recuperado.misiones.length === 5
+            ) {
+                datos = {
+                    misiones: recuperado.misiones.map(valor => valor === true),
+                    compromiso: typeof recuperado.compromiso === "string"
+                        ? recuperado.compromiso
+                        : ""
+                };
+            }
+        } catch (error) {
+            console.warn("No fue posible recuperar el avance guardado.");
+        }
+    }
+
+    document.querySelectorAll("#misiones input[type='checkbox']").forEach(
+        (checkbox, indice) => {
+            checkbox.checked = datos.misiones[indice];
+        }
+    );
+
+    document.getElementById("textoCompromiso").value =
+        datos.compromiso;
+
+    actualizarMisiones();
+}
+
+// Guardar los datos
+function guardarDatos() {
+    localStorage.setItem(CLAVE, JSON.stringify(datos));
+}
+
+// Actualizar el tablero de misiones
+function actualizarMisiones() {
+
+    const casillas = document.querySelectorAll(
+        "#misiones input[type='checkbox']"
+    );
+
+    let completadas = 0;
+
+    casillas.forEach((casilla, indice) => {
+
+        datos.misiones[indice] = casilla.checked;
+
+        const tarjeta = document.getElementById(
+            "mision" + (indice + 1)
+        );
+
+        if (casilla.checked) {
+            completadas++;
+            tarjeta.classList.add("completada");
+        } else {
+            tarjeta.classList.remove("completada");
+        }
+    });
+
+    const puntos = completadas * 100;
+    const porcentaje = (completadas / 5) * 100;
+
+    document.getElementById("contador").textContent =
+        "Misiones completadas: " + completadas + " de 5";
+
+    document.getElementById("totalPuntos").textContent =
+        "Puntos: " + puntos + " / 500";
+
+    document.getElementById("barraProgreso").style.width =
+        porcentaje + "%";
+
+    let mensaje = "";
+
+    if (completadas === 0) {
+        mensaje = "¡Comienza tu primera misión!";
+    } else if (completadas < 5) {
+        mensaje = "¡Buen trabajo! Sigue avanzando. Te faltan " +
+            (5 - completadas) + " misiones.";
+    } else {
+        mensaje = "🎉 ¡Felicidades! Has completado todas las misiones. Eres un agente del cambio.";
+    }
+
+    document.getElementById("estado").textContent = mensaje;
+
+    // Actualizar medallas
+    for (let i = 1; i <= 5; i++) {
+        const medalla = document.getElementById("medalla" + i);
+
+        if (completadas >= i) {
+            medalla.classList.add("obtenida");
+        } else {
+            medalla.classList.remove("obtenida");
+        }
+    }
+
+    guardarDatos();
+}
+
+// Guardar el compromiso personal
+function guardarCompromiso() {
+
+    const texto = document.getElementById("textoCompromiso").value.trim();
+
+    if (texto.length < 10) {
+        document.getElementById("mensajeCompromiso").textContent =
+            "Escribe un compromiso de al menos 10 caracteres.";
+        return;
+    }
+
+    datos.compromiso = texto;
+    guardarDatos();
+
+    document.getElementById("mensajeCompromiso").textContent =
+        "�?Tu compromiso se ha guardado correctamente en este navegador.";
+}
+
+// Iniciar el módulo
+cargarDatos();
+
+</script>
+
+</body>
+</html>

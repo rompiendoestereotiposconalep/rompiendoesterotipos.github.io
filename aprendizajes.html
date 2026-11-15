@@ -1,0 +1,1280 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Aprende sobre igualdad de género, estereotipos y discriminación.">
+
+    <title>Aprende | Rompiendo Estereotipos</title>
+
+    <style>
+        /* ==================================
+           1. CONFIGURACIÓN GENERAL
+        ================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --morado: #7045A5;
+            --morado-oscuro: #43266D;
+            --turquesa: #27B6AD;
+            --amarillo: #FFD166;
+            --coral: #F47C79;
+            --fondo: #F8F6FC;
+            --texto: #302A3D;
+            --blanco: #FFFFFF;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+            line-height: 1.7;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* ==================================
+           2. ENCABEZADO
+        ================================== */
+
+        header {
+            background: white;
+            padding: 15px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 15px #00000012;
+        }
+
+        .logo {
+            color: var(--morado);
+            font-weight: bold;
+            font-size: 19px;
+        }
+
+        .logo span {
+            color: var(--turquesa);
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--texto);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: var(--morado);
+        }
+
+        .menu-btn {
+            display: none;
+            border: none;
+            background: var(--morado);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        /* ==================================
+           3. PORTADA
+        ================================== */
+
+        .portada {
+            background: linear-gradient(
+                120deg,
+                var(--morado),
+                #9569C5,
+                var(--turquesa)
+            );
+
+            color: white;
+            text-align: center;
+            padding: 65px 8%;
+        }
+
+        .portada .etiqueta {
+            display: inline-block;
+            background: var(--amarillo);
+            color: var(--morado-oscuro);
+            padding: 7px 17px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .portada h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .portada p {
+            max-width: 750px;
+            margin: auto;
+            font-size: 17px;
+        }
+
+        /* ==================================
+           4. SECCIONES
+        ================================== */
+
+        section {
+            padding: 55px 8%;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .titulo h2 {
+            color: var(--morado);
+            font-size: 29px;
+            margin-bottom: 8px;
+        }
+
+        .titulo p {
+            color: #777;
+        }
+
+        /* ==================================
+           5. INTRODUCCIÓN
+        ================================== */
+
+        .introduccion {
+            background: white;
+            text-align: center;
+        }
+
+        .introduccion-contenido {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .introduccion-contenido p {
+            margin-bottom: 18px;
+        }
+
+        .frase {
+            background: #F0E8FA;
+            border-left: 5px solid var(--morado);
+            border-radius: 10px;
+            padding: 20px;
+            color: var(--morado-oscuro);
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* ==================================
+           6. TARJETAS DE CONCEPTOS
+        ================================== */
+
+        .conceptos {
+            background: var(--fondo);
+        }
+
+        .contenedor-conceptos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .concepto {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px #0000000c;
+            border-top: 5px solid var(--turquesa);
+        }
+
+        .concepto:nth-child(2) {
+            border-color: var(--coral);
+        }
+
+        .concepto:nth-child(3) {
+            border-color: var(--amarillo);
+        }
+
+        .concepto:nth-child(4) {
+            border-color: var(--morado);
+        }
+
+        .concepto .icono {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .concepto h3 {
+            color: var(--morado);
+            margin-bottom: 10px;
+        }
+
+        .concepto p {
+            font-size: 15px;
+        }
+
+        .ejemplo {
+            background: #F5F2F9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* ==================================
+           7. DIFERENCIAS CONCEPTUALES
+        ================================== */
+
+        .diferencias {
+            background: white;
+        }
+
+        .tabla-contenedor {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 550px;
+        }
+
+        th {
+            background: var(--morado);
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            border: 1px solid #E7E1EF;
+            padding: 15px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background: #F5F1FA;
+        }
+
+        /* ==================================
+           8. SITUACIONES COTIDIANAS
+        ================================== */
+
+        .situaciones {
+            background: #F0EBF8;
+        }
+
+        .situacion {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 5px solid var(--coral);
+        }
+
+        .situacion h3 {
+            color: var(--morado);
+            margin-bottom: 8px;
+        }
+
+        /* ==================================
+           9. MITOS Y REALIDADES
+        ================================== */
+
+        .mitos {
+            background: white;
+        }
+
+        .mito {
+            border: 1px solid #E8E0F0;
+            padding: 17px;
+            border-radius: 12px;
+            margin-bottom: 13px;
+        }
+
+        .mito h3 {
+            font-size: 16px;
+            color: var(--morado);
+            margin-bottom: 7px;
+        }
+
+        .mito p {
+            font-size: 14px;
+        }
+
+        /* ==================================
+           10. ACTIVIDAD INTERACTIVA
+        ================================== */
+
+        .actividad {
+            background: linear-gradient(135deg, #FCE8EE, #EEE7FA);
+        }
+
+        .actividad-contenido {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px #00000010;
+        }
+
+        .actividad-contenido h3 {
+            color: var(--morado);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .instruccion {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .pregunta {
+            padding: 15px;
+            background: #F6F2FA;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .pregunta p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pregunta label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        .pregunta input {
+            margin-right: 8px;
+            accent-color: var(--morado);
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            background: var(--morado);
+            color: white;
+            font-weight: bold;
+            margin: 8px 5px 0 0;
+            transition: 0.2s;
+        }
+
+        .boton:hover {
+            background: var(--morado-oscuro);
+            transform: translateY(-2px);
+        }
+
+        .boton-secundario {
+            background: var(--turquesa);
+            color: #123C3A;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* ==================================
+           11. REFLEXIÓN FINAL
+        ================================== */
+
+        .reflexion {
+            background: white;
+            text-align: center;
+        }
+
+        .reflexion h2 {
+            color: var(--morado);
+            margin-bottom: 15px;
+        }
+
+        .reflexion p {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        /* ==================================
+           12. PIE DE PÁGINA
+        ================================== */
+
+        footer {
+            background: var(--morado-oscuro);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        footer p {
+            margin: 6px;
+        }
+
+        footer a {
+            color: var(--amarillo);
+            font-weight: bold;
+        }
+
+        /* ==================================
+           13. RESPONSIVO
+        ================================== */
+
+        @media(max-width: 750px) {
+
+            header {
+                flex-wrap: wrap;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px 0;
+            }
+
+            nav.activo {
+                display: flex;
+            }
+
+            .contenedor-conceptos {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 40px 6%;
+            }
+
+            .actividad-contenido {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================================
+         ENCABEZADO Y NAVEGACIÓN
+    ================================== -->
+
+    <header>
+
+        <a href="index.html" class="logo">
+            💜 ROMPIENDO <span>ESTEREOTIPOS</span>
+        </a>
+
+        <button class="menu-btn" id="menuBtn"
+                aria-label="Abrir menú"
+                aria-expanded="false">
+            ☰
+        </button>
+
+        <nav id="menu">
+
+            <a href="index.html">Inicio</a>
+            <a href="#introduccion">Introducción</a>
+            <a href="#conceptos">Conceptos</a>
+            <a href="#mitos">Mitos y realidades</a>
+            <a href="#actividad">Actividad</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==================================
+         PORTADA
+    ================================== -->
+
+    <section class="portada">
+
+        <span class="etiqueta">
+            MÓDULO 1 | APRENDE
+        </span>
+
+        <h1>📚 ¡Comencemos a aprender!</h1>
+
+        <p>
+            Conocer los conceptos de igualdad, desigualdad
+            y estereotipos de género es el primer paso
+            para construir una sociedad más justa.
+        </p>
+
+    </section>
+
+
+    <!-- ==================================
+         INTRODUCCIÓN
+    ================================== -->
+
+    <section class="introduccion" id="introduccion">
+
+        <div class="titulo">
+
+            <h2>¿Por qué debemos hablar de igualdad?</h2>
+
+            <p>Comprender el problema nos ayuda a transformarlo.</p>
+
+        </div>
+
+        <div class="introduccion-contenido">
+
+            <p>
+                Todas las personas tenemos capacidades,
+                talentos, intereses y aspiraciones diferentes.
+                Sin embargo, a lo largo del tiempo se han
+                establecido ideas sobre cómo deben comportarse
+                los hombres y las mujeres.
+            </p>
+
+            <p>
+                Estas ideas pueden convertirse en barreras
+                cuando limitan las decisiones, los derechos
+                y las oportunidades de las personas.
+            </p>
+
+            <p>
+                Por eso es importante reconocer los
+                estereotipos, cuestionar los prejuicios
+                y promover el respeto.
+            </p>
+
+            <div class="frase">
+                💜 La igualdad significa que todas las
+                personas deben tener los mismos derechos,
+                oportunidades y posibilidades de desarrollo.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================
+         CONCEPTOS PRINCIPALES
+    ================================== -->
+
+    <section class="conceptos" id="conceptos">
+
+        <div class="titulo">
+
+            <h2>Conceptos que debes conocer</h2>
+
+            <p>
+                Aprende las diferencias entre estos
+                términos fundamentales.
+            </p>
+
+        </div>
+
+        <div class="contenedor-conceptos">
+
+            <article class="concepto">
+
+                <div class="icono">⚖️</div>
+
+                <h3>1. Igualdad de género</h3>
+
+                <p>
+                    Es el principio que establece que
+                    todas las personas deben disfrutar
+                    de los mismos derechos, responsabilidades
+                    y oportunidades, sin importar su género.
+                </p>
+
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong>
+                    Hombres y mujeres pueden acceder a
+                    las mismas oportunidades de estudio,
+                    trabajo y liderazgo.
+                </div>
+
+            </article>
+
+
+            <article class="concepto">
+
+                <div class="icono">🚫</div>
+
+                <h3>2. Desigualdad de género</h3>
+
+                <p>
+                    Ocurre cuando las personas enfrentan
+                    diferencias injustas en sus derechos,
+                    oportunidades, recursos o trato debido
+                    a su género.
+                </p>
+
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong>
+                    Negar a una mujer un puesto de trabajo
+                    solamente por ser mujer.
+                </div>
+
+            </article>
+
+
+            <article class="concepto">
+
+                <div class="icono">🧠</div>
+
+                <h3>3. Estereotipos de género</h3>
+
+                <p>
+                    Son creencias generalizadas sobre
+                    las características, comportamientos,
+                    actividades o capacidades que se
+                    atribuyen a las personas según su género.
+                </p>
+
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong>
+                    Creer que los hombres son mejores
+                    para las matemáticas que las mujeres.
+                </div>
+
+            </article>
+
+
+            <article class="concepto">
+
+                <div class="icono">⛔</div>
+
+                <h3>4. Discriminación de género</h3>
+
+                <p>
+                    Es el trato desfavorable o la exclusión
+                    de una persona por motivos relacionados
+                    con su género.
+                </p>
+
+                <div class="ejemplo">
+                    <strong>Ejemplo:</strong>
+                    Impedir que una estudiante participe
+                    en un concurso de robótica por ser mujer.
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================
+         DIFERENCIAS ENTRE CONCEPTOS
+    ================================== -->
+
+    <section class="diferencias">
+
+        <div class="titulo">
+
+            <h2>¿Son lo mismo?</h2>
+
+            <p>
+                Conoce las diferencias entre estereotipo,
+                prejuicio y discriminación.
+            </p>
+
+        </div>
+
+        <div class="tabla-contenedor">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Concepto</th>
+                        <th>¿Qué significa?</th>
+                        <th>Ejemplo</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td><strong>Estereotipo</strong></td>
+
+                        <td>
+                            Creencia generalizada sobre un grupo.
+                        </td>
+
+                        <td>
+                            Los hombres son mejores conductores.
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td><strong>Prejuicio</strong></td>
+
+                        <td>
+                            Juicio o valoración previa,
+                            sin conocer suficientemente a la persona.
+                        </td>
+
+                        <td>
+                            Pensar que una mujer no sabe conducir.
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td><strong>Discriminación</strong></td>
+
+                        <td>
+                            Acción que excluye o perjudica
+                            injustamente a alguien.
+                        </td>
+
+                        <td>
+                            No contratar a una mujer como conductora
+                            por su género.
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================
+         EJEMPLOS COTIDIANOS
+    ================================== -->
+
+    <section class="situaciones">
+
+        <div class="titulo">
+
+            <h2>Estereotipos en nuestra vida cotidiana</h2>
+
+            <p>
+                Identifica algunas creencias que debemos cuestionar.
+            </p>
+
+        </div>
+
+        <article class="situacion">
+
+            <h3>🏠 En el hogar</h3>
+
+            <p>
+                Creer que las mujeres deben encargarse
+                exclusivamente de cocinar, limpiar y cuidar.
+            </p>
+
+            <strong>Reflexión:</strong>
+            Las responsabilidades del hogar pueden
+            compartirse entre todas las personas.
+        </article>
+
+
+        <article class="situacion">
+
+            <h3>🏫 En la escuela</h3>
+
+            <p>
+                Pensar que los hombres tienen más habilidades
+                para las matemáticas y la tecnología.
+            </p>
+
+            <strong>Reflexión:</strong>
+            Las habilidades se desarrollan con aprendizaje,
+            práctica y oportunidades.
+        </article>
+
+
+        <article class="situacion">
+
+            <h3>💼 En el trabajo</h3>
+
+            <p>
+                Considerar que los puestos directivos
+                son más adecuados para los hombres.
+            </p>
+
+            <strong>Reflexión:</strong>
+            El liderazgo depende de las capacidades,
+            la experiencia y la preparación.
+        </article>
+
+
+        <article class="situacion">
+
+            <h3>💻 En la tecnología</h3>
+
+            <p>
+                Suponer que las mujeres tienen menos interés
+                o capacidad para programar y desarrollar software.
+            </p>
+
+            <strong>Reflexión:</strong>
+            La informática es un campo abierto a todas
+            las personas.
+        </article>
+
+    </section>
+
+
+    <!-- ==================================
+         MITOS Y REALIDADES
+    ================================== -->
+
+    <section class="mitos" id="mitos">
+
+        <div class="titulo">
+
+            <h2>💡 Mitos y realidades</h2>
+
+            <p>
+                Cuestiona las creencias que generan desigualdad.
+            </p>
+
+        </div>
+
+        <article class="mito">
+
+            <h3>❌ MITO: La programación es solamente para hombres.</h3>
+
+            <p>
+                ✅ REALIDAD: Cualquier persona puede aprender
+                programación y desarrollar software.
+            </p>
+
+        </article>
+
+
+        <article class="mito">
+
+            <h3>❌ MITO: Los hombres no deben llorar.</h3>
+
+            <p>
+                ✅ REALIDAD: Todas las personas tienen derecho
+                a expresar sus emociones.
+            </p>
+
+        </article>
+
+
+        <article class="mito">
+
+            <h3>❌ MITO: Las mujeres deben encargarse del hogar.</h3>
+
+            <p>
+                ✅ REALIDAD: Las tareas domésticas son
+                responsabilidades compartidas.
+            </p>
+
+        </article>
+
+
+        <article class="mito">
+
+            <h3>❌ MITO: Algunas profesiones tienen género.</h3>
+
+            <p>
+                ✅ REALIDAD: Las profesiones se relacionan
+                con los intereses, conocimientos y habilidades
+                de cada persona.
+            </p>
+
+        </article>
+
+    </section>
+
+
+    <!-- ==================================
+         ACTIVIDAD INTERACTIVA
+    ================================== -->
+
+    <section class="actividad" id="actividad">
+
+        <div class="titulo">
+
+            <h2>🎯 Comprueba lo que aprendiste</h2>
+
+            <p>
+                Responde las siguientes preguntas.
+            </p>
+
+        </div>
+
+        <div class="actividad-contenido">
+
+            <h3>Mini evaluación: igualdad de género</h3>
+
+            <p class="instruccion">
+                Selecciona una respuesta por pregunta.
+                Al terminar, presiona el botón Evaluar.
+            </p>
+
+            <form id="formulario">
+
+                <div class="pregunta">
+
+                    <p>1. ¿Qué es un estereotipo de género?</p>
+
+                    <label>
+                        <input type="radio" name="p1" value="a">
+                        A) Una creencia generalizada sobre un género.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p1" value="b">
+                        B) Una ley que protege a las personas.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p1" value="c">
+                        C) Una actividad deportiva.
+                    </label>
+
+                </div>
+
+
+                <div class="pregunta">
+
+                    <p>2. ¿Qué significa igualdad de género?</p>
+
+                    <label>
+                        <input type="radio" name="p2" value="a">
+                        A) Que todas las personas deben hacer lo mismo.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p2" value="b">
+                        B) Que todas las personas tengan los mismos
+                        derechos y oportunidades.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p2" value="c">
+                        C) Que solamente las mujeres tengan derechos.
+                    </label>
+
+                </div>
+
+
+                <div class="pregunta">
+
+                    <p>3. ¿Cuál es un ejemplo de discriminación?</p>
+
+                    <label>
+                        <input type="radio" name="p3" value="a">
+                        A) Compartir las tareas del hogar.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p3" value="b">
+                        B) Permitir que todos participen.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p3" value="c">
+                        C) Rechazar a una persona por su género.
+                    </label>
+
+                </div>
+
+
+                <div class="pregunta">
+
+                    <p>4. ¿Quién puede estudiar informática?</p>
+
+                    <label>
+                        <input type="radio" name="p4" value="a">
+                        A) Solamente los hombres.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p4" value="b">
+                        B) Solamente las mujeres.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p4" value="c">
+                        C) Cualquier persona interesada.
+                    </label>
+
+                </div>
+
+
+                <div class="pregunta">
+
+                    <p>5. ¿Qué debemos hacer ante un estereotipo?</p>
+
+                    <label>
+                        <input type="radio" name="p5" value="a">
+                        A) Aceptarlo sin cuestionarlo.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p5" value="b">
+                        B) Cuestionarlo y reflexionar sobre sus efectos.
+                    </label>
+
+                    <label>
+                        <input type="radio" name="p5" value="c">
+                        C) Repetirlo.
+                    </label>
+
+                </div>
+
+
+                <button type="submit" class="boton">
+                    Evaluar mis respuestas
+                </button>
+
+                <button type="reset"
+                        class="boton boton-secundario">
+                    Limpiar respuestas
+                </button>
+
+            </form>
+
+            <div id="resultado" role="status"
+                 aria-live="polite"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================
+         REFLEXIÓN FINAL
+    ================================== -->
+
+    <section class="reflexion">
+
+        <h2>💜 ¡El cambio comienza contigo!</h2>
+
+        <p>
+            Ahora que conoces los conceptos fundamentales,
+            recuerda que tus palabras, decisiones y acciones
+            pueden ayudar a construir una sociedad más
+            respetuosa, inclusiva y equitativa.
+        </p>
+
+        <br>
+
+        <a href="index.html" class="boton">
+            ← Regresar al inicio
+        </a>
+
+    </section>
+
+
+    <!-- ==================================
+         PIE DE PÁGINA
+    ================================== -->
+
+    <footer>
+
+        <h3>💜 ROMPIENDO ESTEREOTIPOS</h3>
+
+        <p>¡Tus capacidades no tienen género!</p>
+
+        <p>
+            Proyecto STEM | Ciencia, Tecnología,
+            Ingeniería y Matemáticas
+        </p>
+
+        <p>
+            <a href="index.html">Volver a la página principal</a>
+        </p>
+
+        <p>© 2026 | Proyecto educativo de bachillerato</p>
+
+    </footer>
+
+
+    <!-- ==================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script>
+
+        // MENÚ RESPONSIVO
+
+        const menuBtn = document.getElementById("menuBtn");
+        const menu = document.getElementById("menu");
+
+        menuBtn.addEventListener("click", function() {
+
+            const abierto = menu.classList.toggle("activo");
+
+            menuBtn.setAttribute("aria-expanded", abierto);
+
+        });
+
+
+        // CERRAR MENÚ AL SELECCIONAR UNA OPCIÓN
+
+        document.querySelectorAll("#menu a").forEach(enlace => {
+
+            enlace.addEventListener("click", function() {
+
+                menu.classList.remove("activo");
+
+                menuBtn.setAttribute("aria-expanded", "false");
+
+            });
+
+        });
+
+
+        // EVALUACIÓN INTERACTIVA
+
+        const formulario = document.getElementById("formulario");
+
+        formulario.addEventListener("submit", function(evento) {
+
+            evento.preventDefault();
+
+            const respuestasCorrectas = {
+                p1: "a",
+                p2: "b",
+                p3: "c",
+                p4: "c",
+                p5: "b"
+            };
+
+            let aciertos = 0;
+            let sinResponder = [];
+
+            // REVISAR LAS RESPUESTAS
+
+            for (let pregunta in respuestasCorrectas) {
+
+                const seleccion = formulario.querySelector(
+                    'input[name="' + pregunta + '"]:checked'
+                );
+
+                if (!seleccion) {
+
+                    sinResponder.push(pregunta);
+
+                } else if (
+                    seleccion.value === respuestasCorrectas[pregunta]
+                ) {
+
+                    aciertos++;
+
+                }
+
+            }
+
+            const resultado = document.getElementById("resultado");
+
+            // VALIDAR QUE TODAS ESTÉN CONTESTADAS
+
+            if (sinResponder.length > 0) {
+
+                resultado.style.background = "#FFF1D9";
+
+                resultado.style.color = "#80520A";
+
+                resultado.textContent =
+                    "⚠️ Responde todas las preguntas antes de evaluar.";
+
+                return;
+
+            }
+
+            // CALCULAR CALIFICACIÓN
+
+            const calificacion = aciertos * 20;
+
+            let mensaje = "";
+
+            if (aciertos === 5) {
+
+                mensaje = "🏆 ¡Excelente! Dominas los conceptos de igualdad.";
+
+            } else if (aciertos >= 3) {
+
+                mensaje = "👏 ¡Muy bien! Sigue fortaleciendo tus conocimientos.";
+
+            } else {
+
+                mensaje = "📚 ¡Sigue aprendiendo! Te invitamos a repasar los conceptos.";
+
+            }
+
+            resultado.style.background = "#DDF5E4";
+
+            resultado.style.color = "#205D35";
+
+            resultado.innerHTML =
+                "Obtuviste " + aciertos + " de 5 respuestas correctas." +
+                "<br>Calificación: " + calificacion + "/100" +
+                "<br><br>" + mensaje;
+
+        });
+
+
+        // LIMPIAR RESULTADOS AL REINICIAR EL FORMULARIO
+
+        formulario.addEventListener("reset", function() {
+
+            const resultado = document.getElementById("resultado");
+
+            resultado.textContent = "";
+
+            resultado.removeAttribute("style");
+
+        });
+
+    </script>
+
+</body>
+</html>
